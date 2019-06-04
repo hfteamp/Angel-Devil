@@ -11,30 +11,27 @@ public class Game {
 	JPanel panel2;
 	int sql = 100;
 	int cnt=0;
-	int selected = 0; // ÀÌÀü ¸»ÀÇ ¹øÈ£
-    int z,k; //ÀÌÀü xy ÁÂÇ¥
+	int selected = 0; // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½È£
+    int z,k; //ï¿½ï¿½ï¿½ï¿½ xy ï¿½ï¿½Ç¥
     String Turn="Devil";
     String who;
-    int an=0,de=0; // ÀÓ½Ã
+    int an=0,de=0; // ï¿½Ó½ï¿½
     JTextField Angelscore = new JTextField("0");
     JTextField Devilscore = new JTextField("0");
-    JLabel label = new JLabel("Â÷·Ê(ÅÏ) :");
+    JLabel label = new JLabel("ï¿½ï¿½ï¿½ï¿½(ï¿½ï¿½) :");
     JTextField whotturn = new JTextField("Devil");
 
 	ImageIcon icon = new ImageIcon("image/Angel.png");
 	ImageIcon icon2 = new ImageIcon("image/Devil.png");
-	piece state[] = new piece[14]; //¸»À» ¿Ã·Á ³õÀ» º¸µå
-	String Stinzg="";
-sss
+	piece state[] = new piece[14]; //ï¿½ï¿½ï¿½ï¿½ ï¿½Ã·ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+	String Stinzg="ì§‘ì—ê°€ê³  ì‹¶ë‹¤";
 
 
 	
-
-	
-	class MyMouseListener implements MouseListener{   //ÆĞ³ÎÆĞ³ÎÆĞ³ÎÆĞ³ÎÆĞ³ÎÆĞ³ÎÆĞ³ÎÆĞ³ÎÆĞ³ÎÆĞ³ÎÆĞ³ÎÆĞ³ÎÆĞ³ÎÆĞ³ÎÆĞ³ÎÆĞ³ÎÆĞ³ÎÆĞ³ÎÆĞ³ÎÆĞ³ÎÆĞ³ÎÆĞ³ÎÆĞ³ÎÆĞ³ÎÆĞ³ÎÆĞ³ÎÆĞ³ÎÆĞ³ÎÆĞ³ÎÆĞ³ÎÆĞ³ÎÆĞ³ÎÆĞ³ÎÆĞ³Î
+	class MyMouseListener implements MouseListener{   //ï¿½Ğ³ï¿½ï¿½Ğ³ï¿½ï¿½Ğ³ï¿½ï¿½Ğ³ï¿½ï¿½Ğ³ï¿½ï¿½Ğ³ï¿½ï¿½Ğ³ï¿½ï¿½Ğ³ï¿½ï¿½Ğ³ï¿½ï¿½Ğ³ï¿½ï¿½Ğ³ï¿½ï¿½Ğ³ï¿½ï¿½Ğ³ï¿½ï¿½Ğ³ï¿½ï¿½Ğ³ï¿½ï¿½Ğ³ï¿½ï¿½Ğ³ï¿½ï¿½Ğ³ï¿½ï¿½Ğ³ï¿½ï¿½Ğ³ï¿½ï¿½Ğ³ï¿½ï¿½Ğ³ï¿½ï¿½Ğ³ï¿½ï¿½Ğ³ï¿½ï¿½Ğ³ï¿½ï¿½Ğ³ï¿½ï¿½Ğ³ï¿½ï¿½Ğ³ï¿½ï¿½Ğ³ï¿½ï¿½Ğ³ï¿½ï¿½Ğ³ï¿½ï¿½Ğ³ï¿½ï¿½Ğ³ï¿½ï¿½Ğ³ï¿½
 		int x,y;
 		
-		MyMouseListener(int a, int b){ //»ı¼ºÀÚ·Î ³»¿ë¹° ¼³Á¤
+		MyMouseListener(int a, int b){ //ï¿½ï¿½ï¿½ï¿½ï¿½Ú·ï¿½ ï¿½ï¿½ï¿½ë¹° ï¿½ï¿½ï¿½ï¿½
              this.x=a;
              this.y=b;
             
@@ -62,7 +59,7 @@ sss
 	               		}
 						
 					}else {
-           			 JOptionPane.showMessageDialog(null, "ÀÌµ¿ÇÒ ¼ö ¾ø½À´Ï´Ù.");
+           			 JOptionPane.showMessageDialog(null, "ï¿½Ìµï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï´ï¿½.");
            			 button[selected].setIcon(new ImageIcon("image/"+Turn+".png"));
            			 cnt=0;
            			 
@@ -70,7 +67,7 @@ sss
 					
 					
 				}else {
-					 JOptionPane.showMessageDialog(null, "¸»À» ¸ÕÀú ¼±ÅÃÇØÁÖ¼¼¿ä.");
+					 JOptionPane.showMessageDialog(null, "ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö¼ï¿½ï¿½ï¿½.");
 					 cnt=0;
 				}
 			
@@ -84,31 +81,31 @@ sss
 	    public void mouseReleased(MouseEvent e) {
 	    }
 
-	    @Override//¸¶¿ì½º°¡ ¹öÆ° ¾ÈÀ¸·Î µé¾î¿À¸é »¡°£»öÀ¸·Î ¹Ù²ñ
+	    @Override//ï¿½ï¿½ï¿½ì½ºï¿½ï¿½ ï¿½ï¿½Æ° ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ù²ï¿½
 	    public void mouseEntered(MouseEvent e) {
 
 	    }
 
-	    @Override//¸¶¿ì½º°¡ ¹öÆ° ¹ÛÀ¸·Î ³ª°¡¸é ³ë¶õ»öÀ¸·Î ¹Ù²ñ
+	    @Override//ï¿½ï¿½ï¿½ì½ºï¿½ï¿½ ï¿½ï¿½Æ° ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ù²ï¿½
 	    public void mouseExited(MouseEvent e) {
 
 	    }
 	    
 	}
     
-    class ClickListener implements ActionListener{     //¸»¸»¸»¸»¸»¸»¸»¸»¸»¸»¸»¸»¸»¸»¸»¸»¸»¸»¸»¸»¸»¸»¸»¸»¸»¸»¸»¸»¸»¸»¸»¸»¸»¸»¸»¸»¸»¸»¸»¸»¸»¸»¸»¸»¸»¸»¸»¸»¸»¸»¸»¸»¸»¸»¸»¸»¸»¸»¸»¸»¸»¸»¸»
-    	 private int i, j, select; //ij ¿òÁúÀÏ ¸»À§Ä¡ select ¿òÁ÷ÀÌ´Â ¸»¹øÈ£
-    	 String nowturn; // ´©±¸ ¸»?
+    class ClickListener implements ActionListener{     //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+    	 private int i, j, select; //ij ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Ä¡ select ï¿½ï¿½ï¿½ï¿½ï¿½Ì´ï¿½ ï¿½ï¿½ï¿½ï¿½È£
+    	 String nowturn; // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½?
 
     	
-         ClickListener(int a, int b,int c,String turn){ //»ı¼ºÀÚ·Î ³»¿ë¹° ¼³Á¤
+         ClickListener(int a, int b,int c,String turn){ //ï¿½ï¿½ï¿½ï¿½ï¿½Ú·ï¿½ ï¿½ï¿½ï¿½ë¹° ï¿½ï¿½ï¿½ï¿½
              this.i=a;
              this.j=b;
-             this.select=c; // ¸»ÀÇ ¹øÈ£
+             this.select=c; // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½È£
              this.nowturn = turn;
         	 }
            
-             public void actionPerformed(ActionEvent e){ //select = ÇöÀç Å¬¸¯( ³»¸» ) selected = ÀÌÀü Å¬¸¯
+             public void actionPerformed(ActionEvent e){ //select = ï¿½ï¿½ï¿½ï¿½ Å¬ï¿½ï¿½( ï¿½ï¿½ï¿½ï¿½ ) selected = ï¿½ï¿½ï¿½ï¿½ Å¬ï¿½ï¿½
             	 if(cnt==0) {
             		 if(nowturn==Turn) {
                		z=state[select].i;
@@ -118,11 +115,11 @@ sss
                		button[selected].setIcon(new ImageIcon("image/"+nowturn+"_clik.png"));
                		cnt++;
             		 }else {
-            			 JOptionPane.showMessageDialog(null, "´ç½Å ÅÏÀÌ ¾Æ´Õ´Ï´Ù.");
+            			 JOptionPane.showMessageDialog(null, "ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Æ´Õ´Ï´ï¿½.");
             		 }
             	 }else if(cnt==1) {
             		 if(who==nowturn) {
-            			 JOptionPane.showMessageDialog(null, "ÀÚ½ÅÀÇ ¸»Àº ÀâÀ»¼ö ¾ø½À´Ï´Ù.");
+            			 JOptionPane.showMessageDialog(null, "ï¿½Ú½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï´ï¿½.");
             			 button[selected].setIcon(new ImageIcon("image/"+Turn+".png"));
             			 cnt=0;
             		 }else if(((z-1==state[select].i||state[select].i==z+1)&&(k-1!=state[select].j&&state[select].j!=k+1))||((k-1==state[select].j||state[select].j==k+1)&&(z-1!=state[select].i&&state[select].i!=z+1))) {
@@ -154,7 +151,7 @@ sss
  	               			whotturn.setText(Turn);
  	               		}
             		 }else {
-            			 JOptionPane.showMessageDialog(null, "ÀÌµ¿ÇÒ ¼ö ¾ø½À´Ï´Ù.");
+            			 JOptionPane.showMessageDialog(null, "ï¿½Ìµï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï´ï¿½.");
             			 button[selected].setIcon(new ImageIcon("image/"+Turn+".png"));
                			 cnt=0;
             		 }
@@ -177,9 +174,9 @@ sss
 			button[a] = new JButton();	
 			
 			button[a].setPreferredSize(new Dimension(80, 80));
-			button[a].setBorderPainted(false); // ¹öÆ° Å×µÎ¸®¼³Á¤
-			button[a].setFocusPainted(false);  // ¹öÆ° ¿µ¿ª ¹è°æ Ç¥½Ã ¼³Á¤
-			button[a].setContentAreaFilled(false); //Æ÷Ä¿½º Ç¥½Ã ¼³Á¤
+			button[a].setBorderPainted(false); // ï¿½ï¿½Æ° ï¿½×µÎ¸ï¿½ï¿½ï¿½ï¿½ï¿½
+			button[a].setFocusPainted(false);  // ï¿½ï¿½Æ° ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ Ç¥ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+			button[a].setContentAreaFilled(false); //ï¿½ï¿½Ä¿ï¿½ï¿½ Ç¥ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 		}
 		for(int x=0;x<7;x++) {
 			for(int y=0;y<7;y++) {	
