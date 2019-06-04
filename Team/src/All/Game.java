@@ -24,8 +24,8 @@ public class Game {
 	ImageIcon icon = new ImageIcon("image/Angel.png");
 	ImageIcon icon2 = new ImageIcon("image/Devil.png");
 	piece state[] = new piece[14]; //말을 올려 놓을 보드
-	
-
+	String Stinzg="";
+sss
 
 
 	
