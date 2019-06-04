@@ -28,7 +28,7 @@ public class Game {
 	String Stinzg2="나ㅇㅇ도";
 
 
-	
+	//유티에프팔
 	class MyMouseListener implements MouseListener{   //�г��г��г��г��г��г��г��г��г��г��г��г��г��г��г��г��г��г��г��г��г��г��г��г��г��г��г��г��г��г��г��г��г��г�
 		int x,y;
 		
