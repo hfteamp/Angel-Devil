@@ -25,7 +25,7 @@ public class Game {
 	ImageIcon icon2 = new ImageIcon("image/Devil.png");
 	piece state[] = new piece[14]; //���� �÷� ���� ����
 	String Stinzg="집에가고 싶다";
-	String Stinzg2="나도";
+	String Stinzg2="나ㅇㅇ도";
 
 
 	
