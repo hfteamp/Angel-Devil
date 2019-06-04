@@ -4,7 +4,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.FlowLayout;
 import java.awt.event.*;
-public class Game {
+public class OldGame {
 	JFrame frame;
 	JPanel panel[][] = new JPanel[7][7];
 	JButton button[] = new JButton[14];
@@ -23,7 +23,7 @@ public class Game {
 
 	ImageIcon icon = new ImageIcon("image/Angel.png");
 	ImageIcon icon2 = new ImageIcon("image/Devil.png");
-	piece state[] = new piece[14]; //���� �÷� ���� ����
+	Oldpiece state[] = new Oldpiece[14]; //���� �÷� ���� ����
 	String Stinzg="집에가고 싶다";
 	String Stinzg2="나ㅇㅇ도";
 
@@ -198,13 +198,13 @@ public class Game {
 					    button[aa].setIcon(icon);
 						panel[x][y].add(button[aa]);
 						button[aa].addActionListener(new ClickListener(x,y,aa,"Angel"));
-						state[aa] = new piece(x,y,aa);
+						state[aa] = new Oldpiece(x,y,aa);
 						aa++;
 					}if(x==6) {
 						button[aa].setIcon(icon2);
 						panel[x][y].add(button[aa]);
 						button[aa].addActionListener(new ClickListener(x,y,aa,"Devil"));
-						state[aa] = new piece(x,y,aa);
+						state[aa] = new Oldpiece(x,y,aa);
 						aa++;
 					}
 					
@@ -248,11 +248,11 @@ public class Game {
 	
 	
 	public static void main(String[] args) {
-		new Game();
+		new OldGame();
 
 
 	}
-	Game(){
+	OldGame(){
 		GUI();	
 	}
 
