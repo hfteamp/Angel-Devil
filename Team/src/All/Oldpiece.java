@@ -1,12 +1,11 @@
 package All;
 
-
-
 public class Oldpiece {
-    int i, j, number; //¸»ÀÇ À§Ä¡,¹øÈ£
-    Oldpiece(int a, int b, int c){
-    	this.i=a;
-        this.j=b;
-        this.number=c;
-    }
+	int i, j, number; // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ä¡,ï¿½ï¿½È£
+
+	Oldpiece(int a, int b, int c) {
+		this.i = a;
+		this.j = b;
+		this.number = c;
+	}
 }

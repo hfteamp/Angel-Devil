@@ -1,8 +1,9 @@
 package All;
 
 public class Setting {
-
+	
 	void Reset() {
+	
 		
 	}
 	void Save() {
@@ -11,4 +12,6 @@ public class Setting {
 	void Load() {
 		
 	}
+
+
 }
