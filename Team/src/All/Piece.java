@@ -81,6 +81,7 @@ public class Piece extends GUI {
 						&& (py - 1 !=  piece[id].y &&  piece[id].y != py + 1))
 						|| ((py - 1 ==  piece[id].y ||  piece[id].y == py + 1)
 								&& (px - 1 !=  piece[id].x &&  piece[id].x != px + 1))) {
+					
 
 					board[piece[id].x][piece[id].y].removeAll();
 					board[piece[id].x][piece[id].y].revalidate();
@@ -90,6 +91,7 @@ public class Piece extends GUI {
 					board[piece[pid].x][piece[pid].y].removeAll();
 					board[piece[pid].x][piece[pid].y].revalidate();
 					board[piece[pid].x][piece[pid].y].repaint();
+					
 
 					piece[pid].x = piece[id].x;
 					piece[pid].y = piece[id].y;

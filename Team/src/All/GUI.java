@@ -7,13 +7,19 @@ import java.awt.event.*;
 public class GUI extends JFrame{
 	static JFrame frame;
 	static JPanel board[][]=new JPanel[7][7];
+	static JPanel board2[][] = new JPanel[2][3];
 	static JButton piecebutton[]=new JButton[14];
 	static JPanel iu;
 	static JTextArea chat;
 	static JTextField input;
 	static JButton submit;
-	static JPanel deathzone;
+	static JButton savebutton;
+	static JButton loadbutton;
+	static JButton resetbutton;
+	static JButton lockbutton;
+	static JButton unlockbutton;
 	static JButton start = new JButton("시작");
+	static JButton deathbutton[]= new JButton[5];
 	int sql=100;
 	static int click=0;
 	static int pid;
@@ -32,6 +38,32 @@ public class GUI extends JFrame{
         	gaming=1;
 			}
 	}
+	class SaveListener implements ActionListener{  //시작 전 후 를 나누는 버튼에 리스너
+		public void actionPerformed(ActionEvent e){
+			
+			}
+	}
+	class LoadListener implements ActionListener{  //시작 전 후 를 나누는 버튼에 리스너
+		public void actionPerformed(ActionEvent e){
+        	
+			}
+	}
+	class ResetListener implements ActionListener{  //시작 전 후 를 나누는 버튼에 리스너
+		public void actionPerformed(ActionEvent e){
+        	
+			}
+	}
+	class LockListener implements ActionListener{  //시작 전 후 를 나누는 버튼에 리스너
+		public void actionPerformed(ActionEvent e){
+        	
+			}
+	}
+	class UnlockListener implements ActionListener{  //시작 전 후 를 나누는 버튼에 리스너
+		public void actionPerformed(ActionEvent e){
+        	
+			}
+	}
+	
 	
 	
 	class BoardListener implements MouseListener{   
@@ -87,7 +119,18 @@ public class GUI extends JFrame{
 	public void addboard() {
 		int aa=0;
 		for(int x=0; x<7; x++) {
+
 			for(int y=0; y<7; y++) {
+				if(x<2) {
+					if(y<3) {
+				board2[x][y]=new JPanel();
+				board2[x][y].setBackground(Color.black);
+				board2[x][y].setLocation((y+8) * 90,(x+8) * 90); 
+				board2[x][y].setSize(90, 90);
+				board2[x][y].setLayout(new FlowLayout());
+				frame.add(board2[x][y]);
+					}
+				}
 				board[x][y] = new JPanel();
 				if(x%2==0&&y%2==0) {
 					board[x][y].setBackground(Color.black);
@@ -121,6 +164,9 @@ public class GUI extends JFrame{
 			}
 		}
 		start.addActionListener(new StartListener());
+
+		
+		
 		addgui();
 	}
 	
@@ -147,14 +193,37 @@ public class GUI extends JFrame{
 }
 	
 	public void addgui() {
+		savebutton = new JButton("save");
+		loadbutton = new JButton("load");
+		resetbutton = new JButton("reset");
+		lockbutton = new JButton("lock");
+		unlockbutton= new JButton("unloack");
+		
+		savebutton.addActionListener(new SaveListener());
+		loadbutton.addActionListener(new LoadListener());
+		resetbutton.addActionListener(new ResetListener());
+		lockbutton.addActionListener(new LockListener());
+		unlockbutton.addActionListener(new UnlockListener());
+		
+		
 		iu= new JPanel();
 		iu.setLayout(null);
 		iu.setBackground(Color.GRAY);
-		
-		start.setBounds(800, 500, 100, 100);
+	
+		savebutton.setBounds(900, 100, 100, 40);
+		loadbutton.setBounds(900, 140, 100, 40);
+		resetbutton.setBounds(900, 180, 100, 40);
+		lockbutton.setBounds(900, 220, 100, 40);
+		unlockbutton.setBounds(900, 260, 100, 40);
+		start.setBounds(800, 500, 100, 40);
 		frame.add(start);
+		frame.add(savebutton);
+		frame.add(loadbutton);
+		frame.add(resetbutton);
+		frame.add(lockbutton);
+		frame.add(unlockbutton);
 		frame.add(iu);
-		frame.setSize(1000, 1000);
+		frame.setSize(1200, 1200);
 		frame.setTitle("Angel and Devil Game");
 		frame.setVisible(true);
 		
