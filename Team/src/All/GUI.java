@@ -28,6 +28,7 @@ public class GUI extends JFrame{
 	static String turn="Devil";
 	static Piece piece[] = new Piece[14];
 	static Piece p;
+	static ChangeImage c = new ChangeImage();
 	static ImageIcon icon = new ImageIcon("image/Angel.png");
 	static ImageIcon icon2 = new ImageIcon("image/Devil.png");
 	static int gaming;
@@ -55,12 +56,12 @@ public class GUI extends JFrame{
 	}
 	class LockListener implements ActionListener{  //시작 전 후 를 나누는 버튼에 리스너
 		public void actionPerformed(ActionEvent e){
-        	
+			c.lock();
 			}
 	}
 	class UnlockListener implements ActionListener{  //시작 전 후 를 나누는 버튼에 리스너
 		public void actionPerformed(ActionEvent e){
-        	
+        	c.unlock();
 			}
 	}
 	
@@ -145,14 +146,14 @@ public class GUI extends JFrame{
 					piecebutton[aa].setIcon(icon);
 					board[x][y].add(piecebutton[aa]);
 					piecebutton[aa].addActionListener(new PieceListener(x,y,aa,"Angel"));
-					piece[aa] = new Piece(x, y, aa,"Angel");
+					piece[aa] = new Piece(x, y, aa,0,"Angel");
 					aa++;
 				}
 				if(x==6) {
 					piecebutton[aa].setIcon(icon2);
 					board[x][y].add(piecebutton[aa]);
 					piecebutton[aa].addActionListener(new PieceListener(x,y,aa,"Devil"));
-					piece[aa] = new Piece(x, y, aa, "Devil");
+					piece[aa] = new Piece(x, y, aa,1,"Devil");
 					aa++;
 				}
 				board[x][y].setLocation(y * sql,x* sql+40); 

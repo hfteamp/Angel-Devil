@@ -8,10 +8,11 @@ public class Piece extends GUI {
 	String team;
 	int ascore, dscore;
 	static int count=0,count2=0;
-	Piece(int x,int y,int id,String team) {
+	Piece(int x,int y,int id,int state,String team) {
 		this.x = x;
 		this.y = y;
 		this.id = id;
+		this.state=state;
 		this.team = team;
 	}
 	void postpiece() {
