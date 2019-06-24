@@ -1,8 +1,12 @@
 package All;
 
 import javax.swing.*;
+
 import java.awt.*;
 import java.awt.event.*;
+import java.io.BufferedReader;
+import java.io.PrintWriter;
+import java.net.Socket;
 
 public class GUI extends JFrame{
 	static JFrame frame;
@@ -32,6 +36,14 @@ public class GUI extends JFrame{
 	static ImageIcon icon = new ImageIcon("image/Angel.png");
 	static ImageIcon icon2 = new ImageIcon("image/Devil.png");
 	static int gaming;
+/*-----------------------------------------------------------------------------*/
+	 static JTextArea incoming;
+	 static JTextField outgoing;
+	 static BufferedReader reader;
+	 static PrintWriter writer;
+	 static Socket sock;
+	 
+/*-----------------------------------------------------------------------------*/
 		
 		
 	class StartListener implements ActionListener{  //시작 전 후 를 나누는 버튼에 리스너
@@ -114,6 +126,21 @@ public class GUI extends JFrame{
 			}
 			 	}
 
+	
+    public class SendButtonListener implements ActionListener {
+        public void actionPerformed(ActionEvent ev) {
+            try {
+                writer.println(outgoing.getText());
+                writer.flush();
+                
+            }
+            catch (Exception ex) {
+                ex.printStackTrace();
+            }
+            outgoing.setText("");
+            outgoing.requestFocus();
+        }
+    }
         
 	
 	
@@ -194,6 +221,24 @@ public class GUI extends JFrame{
 }
 	
 	public void addgui() {
+		/*---------------------------------------------------------------------*/
+        incoming = new JTextArea();
+        incoming.setLineWrap(true);
+        incoming.setWrapStyleWord(true);
+        incoming.setEditable(false);
+        JScrollPane qScroller = new JScrollPane(incoming);
+        qScroller.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+        qScroller.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
+        outgoing = new JTextField();
+        JButton sendButton = new JButton("Send");
+        sendButton.addActionListener(new SendButtonListener());
+        qScroller.setBounds(800, 100, 350, 200);
+        outgoing.setBounds(800, 300, 250, 40);
+        sendButton.setBounds(1050, 300, 100, 40);
+        frame.add(qScroller);
+        frame.add(outgoing);
+        frame.add(sendButton);
+        /*--------------------------------------------------------------------------------------*/
 		savebutton = new JButton("save");
 		loadbutton = new JButton("load");
 		resetbutton = new JButton("reset");
@@ -218,11 +263,6 @@ public class GUI extends JFrame{
 		unlockbutton.setBounds(900, 260, 100, 40);
 		start.setBounds(800, 500, 100, 40);
 		frame.add(start);
-		frame.add(savebutton);
-		frame.add(loadbutton);
-		frame.add(resetbutton);
-		frame.add(lockbutton);
-		frame.add(unlockbutton);
 		frame.add(iu);
 		frame.setSize(1200, 1200);
 		frame.setTitle("Angel and Devil Game");
@@ -234,7 +274,9 @@ public class GUI extends JFrame{
 
 	
 	public static void main(String[] args) {
+		new ClientNetworking().go();
 		GUI gui=new GUI();
 		gui.addpiece();
+		
 	}
 }

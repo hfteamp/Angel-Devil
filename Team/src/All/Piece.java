@@ -24,6 +24,15 @@ public class Piece extends GUI {
 				pteam = this.team;
 				click++;	
 				piecebutton[pid].setIcon(new ImageIcon("image/" + pteam + "_clik.png"));
+	            try {                            // <--------------------------------------------- 네트워크
+	                writer.println(px+":"+py+":"+id);
+	                writer.flush();
+
+	                
+	            }
+	            catch (Exception ex) {
+	                ex.printStackTrace();
+	            } 								// <--------------------------------------------- 네트워크
 
 				
 			}else {
