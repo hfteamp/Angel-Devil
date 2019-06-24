@@ -27,6 +27,9 @@ public class Piece extends GUI {
 
 
 				
+			}else if(killed==1){
+				killed = 0;
+				
 			}else {
 				JOptionPane.showMessageDialog(null, "순서가 아닙니다.");
 			}
@@ -48,7 +51,9 @@ public class Piece extends GUI {
 	            catch (Exception ex) {
 	                ex.printStackTrace();
 	            } 								// <--------------------------------------------- 네트워크
-				click = 0;
+
+			
+
 
 			} else {
 				JOptionPane.showMessageDialog(null, "범위 아웃");
@@ -78,27 +83,18 @@ public class Piece extends GUI {
 						&& (py - 1 !=  piece[id].y &&  piece[id].y != py + 1))
 						|| ((py - 1 ==  piece[id].y ||  piece[id].y == py + 1)
 								&& (px - 1 !=  piece[id].x &&  piece[id].x != px + 1))) {
-					
+		            try {                            // <--------------------------------------------- 네트워크
+		                writer.println(pid+":"+id);
+		                writer.flush();              
+		            }
+		            catch (Exception ex) {
+		                ex.printStackTrace();
+		            } 								// <--------------------------------------------- 네트워크
 
-					board[piece[id].x][piece[id].y].removeAll();
-					board[piece[id].x][piece[id].y].revalidate();
-					board[piece[id].x][piece[id].y].repaint();
-					board[piece[id].x][piece[id].y].add(piecebutton[pid]);
-					piecebutton[pid].setIcon(new ImageIcon("image/" + pteam + ".png"));
-					board[piece[pid].x][piece[pid].y].removeAll();
-					board[piece[pid].x][piece[pid].y].revalidate();
-					board[piece[pid].x][piece[pid].y].repaint();
+		            click = 0;
+		            killed = 1;
 					
-
-					piece[pid].x = piece[id].x;
-					piece[pid].y = piece[id].y;
-					click = 0;
-					
-					if (turn == "Devil") {
-						turn = "Angel";
-					} else {
-						turn = "Devil";
-					}	
+		
 				
 				} else {
 					JOptionPane.showMessageDialog(null, "이동범위 벗어났습니다.");

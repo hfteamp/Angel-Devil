@@ -41,7 +41,7 @@ public class ClientNetworking extends GUI {
 	                while ((message = reader.readLine()) != null) {
 	                	String []a = message.split(":");     	
 	                    incoming.append(message + "\n");
-	                    
+	                    if(a.length==5) {
 	                    board[Integer.parseInt(a[2])][Integer.parseInt(a[3])].add(piecebutton[Integer.parseInt(a[4])]);
 	                    
 	    				piecebutton[Integer.parseInt(a[4])].setIcon(new ImageIcon("image/" + turn + ".png"));
@@ -57,8 +57,48 @@ public class ClientNetworking extends GUI {
 	    				} else {
 	    					turn = "Devil";
 	    				}
+	                    }else if(a.length==2) {
+	    					board[piece[Integer.parseInt(a[1])].x][piece[Integer.parseInt(a[1])].y].removeAll();
+	    					board[piece[Integer.parseInt(a[1])].x][piece[Integer.parseInt(a[1])].y].revalidate();
+	    					board[piece[Integer.parseInt(a[1])].x][piece[Integer.parseInt(a[1])].y].repaint();
+	    					board[piece[Integer.parseInt(a[1])].x][piece[Integer.parseInt(a[1])].y].add(piecebutton[Integer.parseInt(a[0])]);
+	    					piecebutton[Integer.parseInt(a[0])].setIcon(new ImageIcon("image/" + turn + ".png"));
+	    					board[piece[Integer.parseInt(a[0])].x][piece[Integer.parseInt(a[0])].y].removeAll();
+	    					board[piece[Integer.parseInt(a[0])].x][piece[Integer.parseInt(a[0])].y].revalidate();
+	    					board[piece[Integer.parseInt(a[0])].x][piece[Integer.parseInt(a[0])].y].repaint();
+	    					
 
-	                    System.out.println(a[0]+a[1]+a[2]);
+	    					piece[Integer.parseInt(a[0])].x = piece[Integer.parseInt(a[1])].x;
+	    					piece[Integer.parseInt(a[0])].y = piece[Integer.parseInt(a[1])].y;
+	    					
+	    					if (turn == "Devil") {
+	    						turn = "Angel";
+	    					} else {
+	    						turn = "Devil";
+	    					}	
+	    					/*
+	     			board[piece[id].x][piece[id].y].removeAll();
+					board[piece[id].x][piece[id].y].revalidate();
+					board[piece[id].x][piece[id].y].repaint();
+					board[piece[id].x][piece[id].y].add(piecebutton[pid]);
+					piecebutton[pid].setIcon(new ImageIcon("image/" + pteam + ".png"));
+					board[piece[pid].x][piece[pid].y].removeAll();
+					board[piece[pid].x][piece[pid].y].revalidate();
+					board[piece[pid].x][piece[pid].y].repaint();
+					
+
+					piece[pid].x = piece[id].x;
+					piece[pid].y = piece[id].y;
+					click = 0;
+					
+					if (turn == "Devil") {
+						turn = "Angel";
+					} else {
+						turn = "Devil";
+					}	
+	    					 */
+	                    }
+
 	                }
 	            } catch (IOException ex)
 	            {

@@ -36,6 +36,7 @@ public class GUI extends JFrame{
 	static ImageIcon icon = new ImageIcon("image/Angel.png");
 	static ImageIcon icon2 = new ImageIcon("image/Devil.png");
 	static int gaming;
+	static int killed;
 /*-----------------------------------------------------------------------------*/
 	 static JTextArea incoming;
 	 static JTextField outgoing;
@@ -88,6 +89,7 @@ public class GUI extends JFrame{
              }
 		public void mouseClicked(MouseEvent e) {
 			if(gaming==1) piece[pid].move(x,y); // 말이동
+			click = 0;
    	 
         }
 		public void mousePressed(MouseEvent e) {
@@ -123,6 +125,7 @@ public class GUI extends JFrame{
         	if(gaming==1) piece[id].kill(); // 말잡기
         	if(gaming==1) piece[id].postpiece(); // 말상태저장
         	if(gaming==0) piece[id].trans(id); //말변경( 미 구현)
+ 
 			}
 			 	}
 
