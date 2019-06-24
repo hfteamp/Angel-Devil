@@ -24,15 +24,7 @@ public class Piece extends GUI {
 				pteam = this.team;
 				click++;	
 				piecebutton[pid].setIcon(new ImageIcon("image/" + pteam + "_clik.png"));
-	            try {                            // <--------------------------------------------- 네트워크
-	                writer.println(px+":"+py+":"+id);
-	                writer.flush();
 
-	                
-	            }
-	            catch (Exception ex) {
-	                ex.printStackTrace();
-	            } 								// <--------------------------------------------- 네트워크
 
 				
 			}else {
@@ -49,19 +41,14 @@ public class Piece extends GUI {
 		if (click == 1) {
 			if (((px - 1 == x || x == px + 1) && (py - 1 != y && y != py + 1))
 					|| ((py - 1 == y || y == py + 1) && (px - 1 != x && x != px + 1))) {
-				board[x][y].add(piecebutton[pid]);
-				piecebutton[pid].setIcon(new ImageIcon("image/" + turn + ".png"));
-				board[px][py].removeAll();
-				board[px][py].revalidate();
-				board[px][py].repaint();
-				piece[pid].x = piece[pid].x - (piece[pid].x - x);
-				piece[pid].y = piece[pid].y - (piece[pid].y - y);
+	            try {                            // <--------------------------------------------- 네트워크
+	                writer.println(px+":"+py+":"+x+":"+y+":"+pid);
+	                writer.flush();              
+	            }
+	            catch (Exception ex) {
+	                ex.printStackTrace();
+	            } 								// <--------------------------------------------- 네트워크
 				click = 0;
-				if (turn == "Devil") {
-					turn = "Angel";
-				} else {
-					turn = "Devil";
-				}
 
 			} else {
 				JOptionPane.showMessageDialog(null, "범위 아웃");

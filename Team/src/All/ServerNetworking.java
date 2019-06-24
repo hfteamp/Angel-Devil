@@ -8,7 +8,7 @@ import java.net.Socket;
 import java.util.ArrayList;
 import java.util.Iterator;
 
-public class ServerNetworking {
+public class ServerNetworking extends GUI{
 	  ArrayList clientOutputStreams;
 	    
 	    public class ClientHandler implements Runnable {
