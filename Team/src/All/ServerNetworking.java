@@ -10,6 +10,7 @@ import java.util.Iterator;
 
 public class ServerNetworking extends GUI{
 	  ArrayList clientOutputStreams;
+	  static int who=0;
 	    
 	    public class ClientHandler implements Runnable {
 	        BufferedReader reader;
@@ -50,7 +51,6 @@ public class ServerNetworking extends GUI{
 	                
 	                Thread t = new Thread(new ClientHandler(clientSocket));
 	                t.start();
-	                System.out.println("got a connection");
 	            }
 	        } catch (Exception ex) { ex.printStackTrace(); }
 	    }

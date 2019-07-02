@@ -28,13 +28,14 @@ public class GUI extends JFrame{
 	static int click=0;
 	static int pid;
 	static int px,py;
+	static int who;
 	static String pteam;
-	static String turn="Devil";
+	static String turn="Angel1";
 	static Piece piece[] = new Piece[14];
 	static Piece p;
 	static ChangeImage c = new ChangeImage();
 	static ImageIcon icon = new ImageIcon("image/Angel.png");
-	static ImageIcon icon2 = new ImageIcon("image/Devil.png");
+	static ImageIcon icon2 = new ImageIcon("image/Angel1.png");
 	static int gaming;
 	static int killed;
 /*-----------------------------------------------------------------------------*/
@@ -182,8 +183,8 @@ public class GUI extends JFrame{
 				if(x==6) {
 					piecebutton[aa].setIcon(icon2);
 					board[x][y].add(piecebutton[aa]);
-					piecebutton[aa].addActionListener(new PieceListener(x,y,aa,"Devil"));
-					piece[aa] = new Piece(x, y, aa,1,"Devil");
+					piecebutton[aa].addActionListener(new PieceListener(x,y,aa,"Angel1"));
+					piece[aa] = new Piece(x, y, aa,1,"Angel1");
 					aa++;
 				}
 				board[x][y].setLocation(y * sql,x* sql+40); 
@@ -277,9 +278,10 @@ public class GUI extends JFrame{
 
 	
 	public static void main(String[] args) {
-		new ClientNetworking().go();
-		GUI gui=new GUI();
-		gui.addpiece();
+			new ClientNetworking().go();
+			GUI gui=new GUI();
+			gui.addpiece();
+
 		
 	}
 }

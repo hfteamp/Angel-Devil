@@ -8,6 +8,7 @@ import java.awt.event.*;
 
 public class ClientNetworking extends GUI {
 
+
 	 public void go() {
 
 	        setUpNetworking();
@@ -24,7 +25,7 @@ public class ClientNetworking extends GUI {
 	            InputStreamReader streamReader = new InputStreamReader(sock.getInputStream());
 	            reader = new BufferedReader(streamReader);
 	            writer = new PrintWriter(sock.getOutputStream());
-	            System.out.println("networking established");
+
 	        }
 	        catch(IOException ex)
 	        {
@@ -52,10 +53,10 @@ public class ClientNetworking extends GUI {
 	    				piece[Integer.parseInt(a[4])].x = piece[Integer.parseInt(a[4])].x - (piece[Integer.parseInt(a[4])].x - Integer.parseInt(a[2]));
 	    				piece[Integer.parseInt(a[4])].y = piece[Integer.parseInt(a[4])].y - (piece[Integer.parseInt(a[4])].y - Integer.parseInt(a[3]));
 	    				
-	    				if (turn == "Devil") {
+	    				if (turn == "Angel1") {
 	    					turn = "Angel";
 	    				} else {
-	    					turn = "Devil";
+	    					turn = "Angel1";
 	    				}
 	                    }else if(a.length==2) {
 	    					board[piece[Integer.parseInt(a[1])].x][piece[Integer.parseInt(a[1])].y].removeAll();
@@ -71,10 +72,10 @@ public class ClientNetworking extends GUI {
 	    					piece[Integer.parseInt(a[0])].x = piece[Integer.parseInt(a[1])].x;
 	    					piece[Integer.parseInt(a[0])].y = piece[Integer.parseInt(a[1])].y;
 	    					
-	    					if (turn == "Devil") {
+	    					if (turn == "Angel1") {
 	    						turn = "Angel";
 	    					} else {
-	    						turn = "Devil";
+	    						turn = "Angel1";
 	    					}	
 	    					/*
 	     			board[piece[id].x][piece[id].y].removeAll();
