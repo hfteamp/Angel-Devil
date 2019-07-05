@@ -30,12 +30,12 @@ public class GUI extends JFrame{
 	static int px,py;
 	static int who;
 	static String pteam;
-	static String turn="Angel1";
+	static String turn="P2";
 	static Piece piece[] = new Piece[14];
 	static Piece p;
 	static ChangeImage c = new ChangeImage();
-	static ImageIcon icon = new ImageIcon("image/Angel.png");
-	static ImageIcon icon2 = new ImageIcon("image/Angel1.png");
+	static ImageIcon P1icon = new ImageIcon("image/P1.png");
+	static ImageIcon P2icon = new ImageIcon("image/P2.png");
 	static int gaming;
 	static int killed;
 /*-----------------------------------------------------------------------------*/
@@ -174,17 +174,17 @@ public class GUI extends JFrame{
 					board[x][y].setBackground(Color.black);
 				}
 				if(x==0) {
-					piecebutton[aa].setIcon(icon);
+					piecebutton[aa].setIcon(P1icon);
 					board[x][y].add(piecebutton[aa]);
-					piecebutton[aa].addActionListener(new PieceListener(x,y,aa,"Angel"));
-					piece[aa] = new Piece(x, y, aa,0,"Angel");
+					piecebutton[aa].addActionListener(new PieceListener(x,y,aa,"P1"));
+					piece[aa] = new Piece(x, y, aa,0,"P1");
 					aa++;
 				}
 				if(x==6) {
-					piecebutton[aa].setIcon(icon2);
+					piecebutton[aa].setIcon(P2icon);
 					board[x][y].add(piecebutton[aa]);
-					piecebutton[aa].addActionListener(new PieceListener(x,y,aa,"Angel1"));
-					piece[aa] = new Piece(x, y, aa,1,"Angel1");
+					piecebutton[aa].addActionListener(new PieceListener(x,y,aa,"P2"));
+					piece[aa] = new Piece(x, y, aa,0,"P2");
 					aa++;
 				}
 				board[x][y].setLocation(y * sql,x* sql+40); 

@@ -53,10 +53,10 @@ public class ClientNetworking extends GUI {
 	    				piece[Integer.parseInt(a[4])].x = piece[Integer.parseInt(a[4])].x - (piece[Integer.parseInt(a[4])].x - Integer.parseInt(a[2]));
 	    				piece[Integer.parseInt(a[4])].y = piece[Integer.parseInt(a[4])].y - (piece[Integer.parseInt(a[4])].y - Integer.parseInt(a[3]));
 	    				
-	    				if (turn == "Angel1") {
-	    					turn = "Angel";
+	    				if (turn == "P2") {
+	    					turn = "P1";
 	    				} else {
-	    					turn = "Angel1";
+	    					turn = "P2";
 	    				}
 	                    }else if(a.length==2) {
 	    					board[piece[Integer.parseInt(a[1])].x][piece[Integer.parseInt(a[1])].y].removeAll();
@@ -72,10 +72,10 @@ public class ClientNetworking extends GUI {
 	    					piece[Integer.parseInt(a[0])].x = piece[Integer.parseInt(a[1])].x;
 	    					piece[Integer.parseInt(a[0])].y = piece[Integer.parseInt(a[1])].y;
 	    					
-	    					if (turn == "Angel1") {
-	    						turn = "Angel";
+	    					if (turn == "P2") {
+	    						turn = "P1";
 	    					} else {
-	    						turn = "Angel1";
+	    						turn = "P1";
 	    					}	
 	    					/*
 	     			board[piece[id].x][piece[id].y].removeAll();
@@ -92,10 +92,10 @@ public class ClientNetworking extends GUI {
 					piece[pid].y = piece[id].y;
 					click = 0;
 					
-					if (turn == "Devil") {
-						turn = "Angel";
+					if (turn == "P2") {
+						turn = "P1";
 					} else {
-						turn = "Devil";
+						turn = "P2";
 					}	
 	    					 */
 	                    }
