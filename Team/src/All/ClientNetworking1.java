@@ -12,12 +12,6 @@ public class ClientNetworking1 extends GUI {
 	 public void go() {
 
 	        setUpNetworking();
-	        if(ServerNetworking.player==0) {
-	        who="p1";
-	        ServerNetworking.player++;
-	        }else {
-	        	who="p2";
-	        }
 	        Thread readerThread = new Thread(new IncomingReader());
 	        readerThread.start();
 
@@ -46,8 +40,7 @@ public class ClientNetworking1 extends GUI {
 	            try {
 	                while ((message = reader.readLine()) != null) {
 	                	String []a = message.split(":");     	
-	                    incoming.append(":"+message + "\n");
-	                    ServerNetworking.player++;
+	                    incoming.append(who+":"+message + "\n");
 	                    if(a.length==5) {
 	                    board[Integer.parseInt(a[2])][Integer.parseInt(a[3])].add(piecebutton[Integer.parseInt(a[4])]);
 	                    

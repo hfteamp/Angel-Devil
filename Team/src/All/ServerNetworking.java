@@ -10,14 +10,12 @@ import java.util.Iterator;
 
 public class ServerNetworking extends GUI{
 	  ArrayList clientOutputStreams;
-	  static int player;
 	    public class ClientHandler implements Runnable {
 	        BufferedReader reader;
 	        Socket sock;
 	        
 	        public ClientHandler(Socket clientSOcket) {
 	            try {
-	            	player++;
 	                sock = clientSOcket;
 	                InputStreamReader isReader = new InputStreamReader(sock.getInputStream());
 	                reader = new BufferedReader(isReader);

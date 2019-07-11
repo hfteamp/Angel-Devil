@@ -17,11 +17,11 @@ public class Piece extends GUI {
 	}
 	void postpiece() {
 		if (click == 0) {
-			if (team == turn) {
+			if (who == turn && who == team) {
 				px = this.x;
 				py = this.y;
 				pid = this.id;
-				pteam = this.team;
+				pteam = who;
 				click++;	
 				piecebutton[pid].setIcon(new ImageIcon("image/" + pteam + "_clik.png"));
 
@@ -76,7 +76,7 @@ public class Piece extends GUI {
 	void kill(int x, int y) {
 
 	if (click == 1) {
-				if (team == turn) {
+				if (who == turn) {
 					JOptionPane.showMessageDialog(null, "자신의 말은 잡을수 없습니다.");
 					piecebutton[pid].setIcon(new ImageIcon("image/" + pteam + ".png"));
 					click = 0;

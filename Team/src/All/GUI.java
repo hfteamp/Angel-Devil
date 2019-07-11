@@ -10,14 +10,19 @@ import java.net.Socket;
 
 public class GUI extends JFrame{
 	static JFrame frame;
+	static JFrame frame2;
 	static JPanel board[][]=new JPanel[7][7];
 	static JPanel board2[][] = new JPanel[2][3];
 	static JButton piecebutton[]=new JButton[14];
 	static JPanel iu;
+	static JPanel iu2;
 	static JTextArea chat;
 	static JTextField input;
 	static JButton submit;
 	static JButton savebutton;
+	static JRadioButton p1 = new JRadioButton("플레이어1");
+	static JRadioButton p2 = new JRadioButton("플레이어2");
+	ButtonGroup gp = new ButtonGroup();
 	static JButton loadbutton;
 	static JButton resetbutton;
 	static JButton lockbutton;
@@ -57,7 +62,17 @@ public class GUI extends JFrame{
 	}
 	class SaveListener implements ActionListener{  //시작 전 후 를 나누는 버튼에 리스너
 		public void actionPerformed(ActionEvent e){
-			
+			if(p1.isSelected()) {
+				who = "P1";
+				frame2.setVisible(false);
+				addpiece();
+				new ClientNetworking1().go();
+			}else if (p2.isSelected()) {
+				who = "P2";
+				frame2.setVisible(false);
+				addpiece();
+				new ClientNetworking1().go();
+			}
 			}
 	}
 	class LoadListener implements ActionListener{  //시작 전 후 를 나누는 버튼에 리스너
@@ -147,7 +162,31 @@ public class GUI extends JFrame{
             outgoing.requestFocus();
         }
     }
-        
+    public void login() {
+    	
+    	gp.add(p1);
+    	gp.add(p2);
+    	p1.setBounds(20, 20, 150, 50);
+    	p2.setBounds(20, 80, 150, 50);
+    
+    	savebutton = new JButton("save");
+		savebutton.setBounds(250, 50, 100, 50);
+		
+		iu2= new JPanel();
+		iu2.setLayout(null);
+		iu2.setBackground(Color.GRAY);
+		
+		frame2 = new JFrame();
+		frame2.setLayout(new BorderLayout());
+		frame2.setSize(400, 200);
+		frame2.setTitle("Angel and Devil Game");
+		frame2.setVisible(true);
+		savebutton.addActionListener(new SaveListener());
+		iu2.add(savebutton);
+		iu2.add(p1);
+		iu2.add(p2);
+		frame2.add(iu2);
+    }
 	
 	
 	public void addboard() {
@@ -245,13 +284,13 @@ public class GUI extends JFrame{
         frame.add(outgoing);
         frame.add(sendButton);
         /*--------------------------------------------------------------------------------------*/
-		savebutton = new JButton("save");
+		
 		loadbutton = new JButton("load");
 		resetbutton = new JButton("reset");
 		lockbutton = new JButton("lock");
 		unlockbutton= new JButton("unloack");
 		
-		savebutton.addActionListener(new SaveListener());
+		
 		loadbutton.addActionListener(new LoadListener());
 		resetbutton.addActionListener(new ResetListener());
 		lockbutton.addActionListener(new LockListener());
@@ -262,7 +301,7 @@ public class GUI extends JFrame{
 		iu.setLayout(null);
 		iu.setBackground(Color.GRAY);
 	
-		savebutton.setBounds(900, 100, 100, 40);
+		
 		loadbutton.setBounds(900, 140, 100, 40);
 		resetbutton.setBounds(900, 180, 100, 40);
 		lockbutton.setBounds(900, 220, 100, 40);
@@ -280,11 +319,11 @@ public class GUI extends JFrame{
 
 	
 	public static void main(String[] args) {
+	
 		GUI gui=new GUI();
-		gui.addpiece();
-		System.out.println(who);
-			new ClientNetworking1().go();
-			System.out.println(who);
+		gui.login();
+		
+
 
 
 
