@@ -8,23 +8,20 @@ import java.io.BufferedReader;
 import java.io.PrintWriter;
 import java.net.Socket;
 
+
 public class GUI extends JFrame {
-	static JFrame frame;
 	static JPanel board[][] = new JPanel[7][7];
-	static JPanel board2[][] = new JPanel[2][3];
 	static JButton piecebutton[] = new JButton[14];
-	static JPanel iu;
-	static JTextArea chat;
-	static JTextField input;
-	static JButton submit;
-	static JButton savebutton;
-	static JButton loadbutton;
-	static JButton resetbutton;
-	static JButton lockbutton;
-	static JButton unlockbutton;
-	static JButton start = new JButton("시작");
-	static JButton deathbutton[] = new JButton[5];
-	int sql = 100;
+	static JButton deathbutton[] = new JButton[6];
+	JFrame frame;
+	JPanel board2[][] = new JPanel[2][3];
+	JPanel iu;
+	JTextArea chat;
+	JTextField input;
+	JButton submit;
+	JButton start = new JButton("시작");
+	JButton p1 = new JButton("P1");
+	JButton p2 = new JButton("P2");;
 	static int click = 0;
 	static int pid;
 	static int px, py;
@@ -33,12 +30,14 @@ public class GUI extends JFrame {
 	static String turn = "P2";
 	static Piece piece[] = new Piece[14];
 	static Piece p;
-	static ChangeImage c = new ChangeImage();
-	static ImageIcon P1icon = new ImageIcon("image/P1.png");
-	static ImageIcon P2icon = new ImageIcon("image/P2.png");
-	static int gaming;
-	static int killed;
+
+	ImageIcon P1icon = new ImageIcon("image/P1.png");
+	ImageIcon P2icon = new ImageIcon("image/P2.png");
+	int sql = 100;
+	int gaming;
+	int killed;
 	int state;
+	int deathkill = 0;
 	/*-----------------------------------------------------------------------------*/
 	static JTextArea incoming;
 	static JTextField outgoing;
@@ -54,35 +53,6 @@ public class GUI extends JFrame {
 		}
 	}
 
-	class SaveListener implements ActionListener { // 시작 전 후 를 나누는 버튼에 리스너
-		public void actionPerformed(ActionEvent e) {
-
-		}
-	}
-
-	class LoadListener implements ActionListener { // 시작 전 후 를 나누는 버튼에 리스너
-		public void actionPerformed(ActionEvent e) {
-
-		}
-	}
-
-	class ResetListener implements ActionListener { // 시작 전 후 를 나누는 버튼에 리스너
-		public void actionPerformed(ActionEvent e) {
-
-		}
-	}
-
-	class LockListener implements ActionListener { // 시작 전 후 를 나누는 버튼에 리스너
-		public void actionPerformed(ActionEvent e) {
-			c.lock();
-		}
-	}
-
-	class UnlockListener implements ActionListener { // 시작 전 후 를 나누는 버튼에 리스너
-		public void actionPerformed(ActionEvent e) {
-			c.unlock();
-		}
-	}
 
 	class BoardListener implements MouseListener {
 		int x, y;
@@ -172,9 +142,9 @@ public class GUI extends JFrame {
 
 	public void addboard() {
 		int aa = 0;
+		int ii = 0;
 		for (int x = 0; x < 7; x++) {
-
-			for (int y = 0; y < 7; y++) {
+		for (int y = 0; y < 7; y++) {
 				if (x < 2) {
 					if (y < 3) {
 						board2[x][y] = new JPanel();
@@ -183,6 +153,15 @@ public class GUI extends JFrame {
 						board2[x][y].setSize(90, 90);
 						board2[x][y].setLayout(new FlowLayout());
 						frame.add(board2[x][y]);
+						if (ii < 6) {
+							deathbutton[ii] = new JButton();
+							deathbutton[ii].setPreferredSize(new Dimension(80, 80));
+							deathbutton[ii].setBorderPainted(false);
+							deathbutton[ii].setFocusPainted(false);
+							deathbutton[ii].setContentAreaFilled(false);
+							board2[x][y].add(deathbutton[ii]);
+							ii++;
+						}
 					}
 				}
 				board[x][y] = new JPanel();
@@ -198,14 +177,14 @@ public class GUI extends JFrame {
 				if (x == 0) {
 					piecebutton[aa].setIcon(P1icon);
 					board[x][y].add(piecebutton[aa]);
-					piecebutton[aa].addActionListener(new PieceListener(x, y, aa, state, "P1"));
+					piecebutton[aa].addActionListener(new PieceListener(x, y, aa,state,"P1"));
 					piece[aa] = new Piece(x, y, aa, 0, "P1");
 					aa++;
 				}
 				if (x == 6) {
 					piecebutton[aa].setIcon(P2icon);
 					board[x][y].add(piecebutton[aa]);
-					piecebutton[aa].addActionListener(new PieceListener(x, y, aa, state, "P2"));
+					piecebutton[aa].addActionListener(new PieceListener(x, y, aa,state, "P2"));
 					piece[aa] = new Piece(x, y, aa, 0, "P2");
 					aa++;
 				}
@@ -257,28 +236,16 @@ public class GUI extends JFrame {
 		frame.add(outgoing);
 		frame.add(sendButton);
 		/*--------------------------------------------------------------------------------------*/
-		savebutton = new JButton("save");
-		loadbutton = new JButton("load");
-		resetbutton = new JButton("reset");
-		lockbutton = new JButton("lock");
-		unlockbutton = new JButton("unloack");
-
-		savebutton.addActionListener(new SaveListener());
-		loadbutton.addActionListener(new LoadListener());
-		resetbutton.addActionListener(new ResetListener());
-		lockbutton.addActionListener(new LockListener());
-		unlockbutton.addActionListener(new UnlockListener());
 
 		iu = new JPanel();
 		iu.setLayout(null);
 		iu.setBackground(Color.GRAY);
 
-		savebutton.setBounds(900, 100, 100, 40);
-		loadbutton.setBounds(900, 140, 100, 40);
-		resetbutton.setBounds(900, 180, 100, 40);
-		lockbutton.setBounds(900, 220, 100, 40);
-		unlockbutton.setBounds(900, 260, 100, 40);
 		start.setBounds(800, 500, 100, 40);
+		p1.setBounds(900, 600, 100, 40);
+		p2.setBounds(900, 650, 100, 40);
+		frame.add(p1);
+		frame.add(p2);
 		frame.add(start);
 		frame.add(iu);
 		frame.setSize(1200, 1200);

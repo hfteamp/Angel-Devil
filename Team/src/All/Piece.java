@@ -8,7 +8,7 @@ public class Piece extends GUI {
 	String team;
 	int ascore, dscore;
 	static int count = 3, count2 = 0;
-
+	static int ii=0;
 	Piece(int x, int y, int id, int state, String team) {
 		this.x = x;
 		this.y = y;
@@ -86,6 +86,7 @@ public class Piece extends GUI {
 				try { // <--------------------------------------------- 네트워크
 					writer.println(pid + ":" + id);
 					writer.flush();
+						piece[id].killtrans();
 				} catch (Exception ex) {
 					ex.printStackTrace();
 				} // <--------------------------------------------- 네트워크
@@ -95,6 +96,8 @@ public class Piece extends GUI {
 
 			} else {
 				JOptionPane.showMessageDialog(null, "이동범위 벗어났습니다.");
+				piecebutton[pid].setIcon(new ImageIcon("image/" + turn + ".png"));
+				click = 0;
 
 				if (state == 1) {
 					piecebutton[pid].setIcon(new ImageIcon("image/" + turn + "_Devil" + ".png"));
@@ -117,4 +120,25 @@ public class Piece extends GUI {
 		
 	}
 
+	public void killtrans() {
+	if(state==0) {
+		deathbutton[ii].setIcon(new ImageIcon("image/" + "Angel" + ".png"));
+		System.out.println(ii);
+		++ii;
+	}
+	else if(state==1) {
+		deathbutton[ii].setIcon(new ImageIcon("image/" + "Devil" + ".png"));
+		System.out.println(ii);
+		++ii;
+		++deathkill;
+	}
+	if(deathkill==3) {
+		JOptionPane.showMessageDialog(null, "악마 3마리를 잡으셔서 게임에서 졌습니다");
+		
+	}
+}
+	
+	
+
+	
 }

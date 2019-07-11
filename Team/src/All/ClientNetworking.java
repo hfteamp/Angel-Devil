@@ -76,7 +76,7 @@ public class ClientNetworking extends GUI {
 						if (turn == "P2") {
 							turn = "P1";
 						} else {
-							turn = "P1";
+							turn = "P2";
 						}
 						/*
 						 * board[piece[id].x][piece[id].y].removeAll();
