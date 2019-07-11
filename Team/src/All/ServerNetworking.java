@@ -10,7 +10,7 @@ import java.util.Iterator;
 
 public class ServerNetworking extends GUI{
 	  ArrayList clientOutputStreams;
-	  static int who=0;
+	  static int player;
 	    
 	    public class ClientHandler implements Runnable {
 	        BufferedReader reader;
@@ -18,6 +18,7 @@ public class ServerNetworking extends GUI{
 	        
 	        public ClientHandler(Socket clientSOcket) {
 	            try {
+	            	player++;
 	                sock = clientSOcket;
 	                InputStreamReader isReader = new InputStreamReader(sock.getInputStream());
 	                reader = new BufferedReader(isReader);
@@ -29,7 +30,7 @@ public class ServerNetworking extends GUI{
 	            String message;
 	            try {
 	                while ((message = reader.readLine()) != null) {
-	                    System.out.println("read " + message);
+	                    System.out.println("read " + who +":"+ message);
 	                    tellEveryone(message);
 	                }
 	            } catch (Exception ex) { ex.printStackTrace(); }
@@ -41,7 +42,9 @@ public class ServerNetworking extends GUI{
 	    }
 	    
 	    public void go() {
+	    	
 	        clientOutputStreams = new ArrayList();
+
 	        try {
 	            ServerSocket serverSock = new ServerSocket(5000);
 	            while(true) {

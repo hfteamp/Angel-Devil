@@ -28,7 +28,6 @@ public class GUI extends JFrame{
 	static int click=0;
 	static int pid;
 	static int px,py;
-	static int who;
 	static String pteam;
 	static String turn="P2";
 	static Piece piece[] = new Piece[14];
@@ -38,12 +37,14 @@ public class GUI extends JFrame{
 	static ImageIcon P2icon = new ImageIcon("image/P2.png");
 	static int gaming;
 	static int killed;
+	static String who;
 /*-----------------------------------------------------------------------------*/
 	 static JTextArea incoming;
 	 static JTextField outgoing;
 	 static BufferedReader reader;
 	 static PrintWriter writer;
 	 static Socket sock;
+		
 	 
 /*-----------------------------------------------------------------------------*/
 		
@@ -278,9 +279,14 @@ public class GUI extends JFrame{
 
 	
 	public static void main(String[] args) {
-			new ClientNetworking().go();
-			GUI gui=new GUI();
-			gui.addpiece();
+		GUI gui=new GUI();
+		gui.addpiece();
+		System.out.println(who);
+			new ClientNetworking1().go();
+			System.out.println(who);
+
+
+
 
 		
 	}
