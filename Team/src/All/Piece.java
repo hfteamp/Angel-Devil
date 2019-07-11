@@ -8,6 +8,7 @@ public class Piece extends GUI {
 	String team;
 	int ascore, dscore;
 	static int count=0,count2=0;
+	static int ii=0;
 	Piece(int x,int y,int id,int state,String team) {
 		this.x = x;
 		this.y = y;
@@ -85,7 +86,8 @@ public class Piece extends GUI {
 								&& (px - 1 !=  piece[id].x &&  piece[id].x != px + 1))) {
 		            try {                            // <--------------------------------------------- 네트워크
 		                writer.println(pid+":"+id);
-		                writer.flush();              
+		                writer.flush();
+		                piece[id].killtrans();
 		            }
 		            catch (Exception ex) {
 		                ex.printStackTrace();
@@ -124,4 +126,90 @@ public class Piece extends GUI {
 		
 
 	}
+	public void killtrans() {
+	if(state==0) {
+		deathbutton[ii].setIcon(new ImageIcon("image/" + "Angel" + ".png"));
+		System.out.println(ii);
+		++ii;
+	}
+	else if(state==1) {
+		deathbutton[ii].setIcon(new ImageIcon("image/" + "Devil" + ".png"));
+		System.out.println(ii);
+		++ii;
+		kill++;
+	}
+	if(kill==3) {
+		JOptionPane.showMessageDialog(null, "악마 3마리를 잡으셔서 게임에서 졌습니다");
+		gaming=0;
+	}
+	
+	
+	/*if(kill==1) {
+		kill++;
+	if(state==0) {
+		System.out.println("kill 1");
+		deathbutton[0].setIcon(new ImageIcon("image/" + "Angel" + ".png"));
+	}
+	else if(state==1) {
+		System.out.println("kill 1");
+		deathbutton[0].setIcon(new ImageIcon("image/" + "Devil" + ".png"));
+	}
+}
+	else if(kill==2) {
+		kill++;
+		if(state==0) {		
+			System.out.println("kill 2");
+			deathbutton[1].setIcon(new ImageIcon("image/" + "Angel" + ".png"));
+		}
+		else if(state==1) {
+			System.out.println("kill 2");
+			deathbutton[1].setIcon(new ImageIcon("image/" + "Devil" + ".png"));
+		}
+	}
+	else if(kill==3) {
+		kill++;
+		if(state==0) {			
+			System.out.println("kill 3");
+			deathbutton[2].setIcon(new ImageIcon("image/" + "Angel" + ".png"));
+		}
+		else if(state==1) {
+			System.out.println("kill 3");
+			deathbutton[2].setIcon(new ImageIcon("image/" + "Devil" + ".png"));
+		}
+	}
+	else if(kill==4) {
+		kill++;
+		if(state==0) {			
+			System.out.println("kill 4");
+			deathbutton[3].setIcon(new ImageIcon("image/" + "Angel" + ".png"));
+		}
+		else if(state==1) {
+			System.out.println("kill 4");
+			deathbutton[3].setIcon(new ImageIcon("image/" + "Devil" + ".png"));
+		}
+	}
+	else if(kill==5) {
+		kill++;
+		if(state==0) {		
+			System.out.println("kill 5");
+			deathbutton[4].setIcon(new ImageIcon("image/" + "Angel" + ".png"));
+		}
+		else if(state==1) {
+			System.out.println("kill 5");
+			deathbutton[4].setIcon(new ImageIcon("image/" + "Devil" + ".png"));
+		}
+	}
+	else if(kill==6) {
+		kill++;
+		if(state==0) {		
+			System.out.println("kill 6");
+			deathbutton[5].setIcon(new ImageIcon("image/" + "Angel" + ".png"));
+		}
+		else if(state==1) {
+			System.out.println("kill 6");
+			deathbutton[5].setIcon(new ImageIcon("image/" + "Devil" + ".png"));
+		}
+	}*/
+}
+	
 }

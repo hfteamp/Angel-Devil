@@ -23,7 +23,7 @@ public class GUI extends JFrame{
 	static JButton lockbutton;
 	static JButton unlockbutton;
 	static JButton start = new JButton("시작");
-	static JButton deathbutton[]= new JButton[5];
+	static JButton deathbutton[]= new JButton[6];
 	int sql=100;
 	static int click=0;
 	static int pid;
@@ -38,6 +38,7 @@ public class GUI extends JFrame{
 	static ImageIcon P2icon = new ImageIcon("image/P2.png");
 	static int gaming;
 	static int killed;
+	static int kill=0;
 /*-----------------------------------------------------------------------------*/
 	 static JTextArea incoming;
 	 static JTextField outgoing;
@@ -150,6 +151,7 @@ public class GUI extends JFrame{
 	
 	public void addboard() {
 		int aa=0;
+		int ii=0;
 		for(int x=0; x<7; x++) {
 
 			for(int y=0; y<7; y++) {
@@ -161,6 +163,15 @@ public class GUI extends JFrame{
 				board2[x][y].setSize(90, 90);
 				board2[x][y].setLayout(new FlowLayout());
 				frame.add(board2[x][y]);
+				if(ii<6) {
+					deathbutton[ii]=new JButton();
+					deathbutton[ii].setPreferredSize(new Dimension(80, 80));
+					deathbutton[ii].setBorderPainted(false); 
+					deathbutton[ii].setFocusPainted(false);  
+					deathbutton[ii].setContentAreaFilled(false);
+					board2[x][y].add(deathbutton[ii]);
+					ii++;
+				}
 					}
 				}
 				board[x][y] = new JPanel();
