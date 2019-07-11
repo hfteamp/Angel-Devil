@@ -11,7 +11,6 @@ import java.util.Iterator;
 public class ServerNetworking extends GUI{
 	  ArrayList clientOutputStreams;
 	  static int player;
-	    
 	    public class ClientHandler implements Runnable {
 	        BufferedReader reader;
 	        Socket sock;
@@ -38,6 +37,7 @@ public class ServerNetworking extends GUI{
 	    }
 	    
 	    public static void main(String[] args) {
+	    	
 	        new ServerNetworking().go();
 	    }
 	    

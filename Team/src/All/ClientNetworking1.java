@@ -46,7 +46,8 @@ public class ClientNetworking1 extends GUI {
 	            try {
 	                while ((message = reader.readLine()) != null) {
 	                	String []a = message.split(":");     	
-	                    incoming.append(who+":"+message + "\n");
+	                    incoming.append(":"+message + "\n");
+	                    ServerNetworking.player++;
 	                    if(a.length==5) {
 	                    board[Integer.parseInt(a[2])][Integer.parseInt(a[3])].add(piecebutton[Integer.parseInt(a[4])]);
 	                    

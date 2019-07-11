@@ -33,7 +33,8 @@ public class Piece extends GUI {
 			}else {
 				JOptionPane.showMessageDialog(null, "순서가 아닙니다.");
 			}
-    	}
+    	}else
+    		click=0;
 
 
 
@@ -72,17 +73,15 @@ public class Piece extends GUI {
 
 	}
 
-	void kill() {
+	void kill(int x, int y) {
 
 	if (click == 1) {
 				if (team == turn) {
 					JOptionPane.showMessageDialog(null, "자신의 말은 잡을수 없습니다.");
 					piecebutton[pid].setIcon(new ImageIcon("image/" + pteam + ".png"));
 					click = 0;
-				} else if (((px - 1 == piece[id].x || piece[id].x == px + 1)
-						&& (py - 1 !=  piece[id].y &&  piece[id].y != py + 1))
-						|| ((py - 1 ==  piece[id].y ||  piece[id].y == py + 1)
-								&& (px - 1 !=  piece[id].x &&  piece[id].x != px + 1))) {
+				} else if (((px - 1 == x || x == px + 1) && (py - 1 != y && y != py + 1))
+						|| ((py - 1 == y || y == py + 1) && (px - 1 != x && x != px + 1))) {
 		            try {                            // <--------------------------------------------- 네트워크
 		                writer.println(pid+":"+id);
 		                writer.flush();              
@@ -99,7 +98,7 @@ public class Piece extends GUI {
 				} else {
 					JOptionPane.showMessageDialog(null, "이동범위 벗어났습니다.");
 					piecebutton[pid].setIcon(new ImageIcon("image/" + turn + ".png"));
-					click = 0;
+					
 				}
 
 			}
