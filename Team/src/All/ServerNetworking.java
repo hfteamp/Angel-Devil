@@ -9,16 +9,20 @@ import java.util.ArrayList;
 import java.util.Iterator;
 
 public class ServerNetworking extends GUI{
+		static int select=55;
 	  ArrayList clientOutputStreams;
 	    public class ClientHandler implements Runnable {
 	        BufferedReader reader;
 	        Socket sock;
+	        
 	        
 	        public ClientHandler(Socket clientSOcket) {
 	            try {
 	                sock = clientSOcket;
 	                InputStreamReader isReader = new InputStreamReader(sock.getInputStream());
 	                reader = new BufferedReader(isReader);
+	                select++;
+
 	                
 	            } catch (Exception ex) { ex.printStackTrace(); }
 	        }

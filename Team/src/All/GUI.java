@@ -27,7 +27,7 @@ public class GUI extends JFrame{
 	static JButton resetbutton;
 	static JButton lockbutton;
 	static JButton unlockbutton;
-	static JButton start = new JButton("시작");
+	static JButton start = new JButton("준비(Ready)");
 	static JButton deathbutton[]= new JButton[5];
 	int sql=100;
 	static int click=0;
@@ -43,6 +43,8 @@ public class GUI extends JFrame{
 	static int gaming;
 	static int killed;
 	static String who;
+	
+	
 
 /*-----------------------------------------------------------------------------*/
 	 static JTextArea incoming;
@@ -57,6 +59,9 @@ public class GUI extends JFrame{
 		
 	class StartListener implements ActionListener{  //시작 전 후 를 나누는 버튼에 리스너
 		public void actionPerformed(ActionEvent e){
+			writer.println(who+" | "+"님이 준비(Ready) 하였습니다.");
+            writer.flush();
+            start.setEnabled(false);
         	gaming=1;
 			}
 	}
@@ -151,7 +156,7 @@ public class GUI extends JFrame{
     public class SendButtonListener implements ActionListener {
         public void actionPerformed(ActionEvent ev) {
             try {
-                writer.println(outgoing.getText());
+                writer.println(who+" | "+outgoing.getText());
                 writer.flush();
                 
             }
@@ -169,7 +174,7 @@ public class GUI extends JFrame{
     	p1.setBounds(20, 20, 150, 50);
     	p2.setBounds(20, 80, 150, 50);
     
-    	savebutton = new JButton("save");
+    	savebutton = new JButton("시작");
 		savebutton.setBounds(250, 50, 100, 50);
 		
 		iu2= new JPanel();
@@ -306,7 +311,7 @@ public class GUI extends JFrame{
 		resetbutton.setBounds(900, 180, 100, 40);
 		lockbutton.setBounds(900, 220, 100, 40);
 		unlockbutton.setBounds(900, 260, 100, 40);
-		start.setBounds(800, 500, 100, 40);
+		start.setBounds(800, 500, 130, 40);
 		frame.add(start);
 		frame.add(iu);
 		frame.setSize(1200, 1200);
