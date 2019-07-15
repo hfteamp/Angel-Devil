@@ -41,11 +41,11 @@ public class ClientNetworking1 extends GUI {
 	            try {
 	                while ((message = reader.readLine()) != null) {
 	                	String []a = message.split(":");     	
-	                    incoming.append(message + "\n");
+	                    
 	                    if(a.length==5) {
 	                    board[Integer.parseInt(a[2])][Integer.parseInt(a[3])].add(piecebutton[Integer.parseInt(a[4])]);
 	                    
-	    				piecebutton[Integer.parseInt(a[4])].setIcon(new ImageIcon("image/" + turn + ".png"));
+	    				piecebutton[Integer.parseInt(a[4])].setIcon(new ImageIcon("image/" + turn + ".png")); ////
 	    				
 	    				board[Integer.parseInt(a[0])][Integer.parseInt(a[1])].removeAll();
 	    				board[Integer.parseInt(a[0])][Integer.parseInt(a[1])].revalidate();
@@ -63,7 +63,7 @@ public class ClientNetworking1 extends GUI {
 	    					board[piece[Integer.parseInt(a[1])].x][piece[Integer.parseInt(a[1])].y].revalidate();
 	    					board[piece[Integer.parseInt(a[1])].x][piece[Integer.parseInt(a[1])].y].repaint();
 	    					board[piece[Integer.parseInt(a[1])].x][piece[Integer.parseInt(a[1])].y].add(piecebutton[Integer.parseInt(a[0])]);
-	    					piecebutton[Integer.parseInt(a[0])].setIcon(new ImageIcon("image/" + turn + ".png"));
+	    					piecebutton[Integer.parseInt(a[0])].setIcon(new ImageIcon("image/" + turn + ".png"));    /////
 	    					board[piece[Integer.parseInt(a[0])].x][piece[Integer.parseInt(a[0])].y].removeAll();
 	    					board[piece[Integer.parseInt(a[0])].x][piece[Integer.parseInt(a[0])].y].revalidate();
 	    					board[piece[Integer.parseInt(a[0])].x][piece[Integer.parseInt(a[0])].y].repaint();
@@ -75,9 +75,14 @@ public class ClientNetworking1 extends GUI {
 	    					if (turn == "P2") {
 	    						turn = "P1";
 	    					} else {
-	    						turn = "P1";
+	    						turn = "P2";
 	    					}	
 
+	                    }else if(a.length==1){
+	                    	
+	                    	timer.setText(a[0]);
+	                    }else {
+	                    	incoming.append(message + "\n");
 	                    }
 
 	                }

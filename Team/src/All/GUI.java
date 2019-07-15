@@ -1,7 +1,6 @@
 package All;
 
 import javax.swing.*;
-
 import java.awt.*;
 import java.awt.event.*;
 import java.io.BufferedReader;
@@ -22,14 +21,11 @@ public class GUI extends JFrame{
 	static JButton savebutton;
 	static JRadioButton p1 = new JRadioButton("플레이어1");
 	static JRadioButton p2 = new JRadioButton("플레이어2");
+	
+	
 	ButtonGroup gp = new ButtonGroup();
-	static JButton loadbutton;
-	static JButton resetbutton;
-	static JButton lockbutton;
-	static JButton unlockbutton;
 	static JButton start = new JButton("준비(Ready)");
-	static JButton deathbutton[]= new JButton[5];
-	int sql=100;
+	static JButton deathbutton[]= new JButton[6];
 	static int click=0;
 	static int pid;
 	static int px,py;
@@ -37,12 +33,14 @@ public class GUI extends JFrame{
 	static String turn="P2";
 	static Piece piece[] = new Piece[14];
 	static Piece p;
-	static ChangeImage c = new ChangeImage();
-	static ImageIcon P1icon = new ImageIcon("image/P1.png");
-	static ImageIcon P2icon = new ImageIcon("image/P2.png");
-	static int gaming;
-	static int killed;
+	
 	static String who;
+	ImageIcon P1icon = new ImageIcon("image/P1.png");
+	ImageIcon P2icon = new ImageIcon("image/P2.png");
+	int gaming;
+	int killed;
+	static int deathkill = 0;
+	int sql=100;
 	
 	
 
@@ -52,13 +50,18 @@ public class GUI extends JFrame{
 	 static BufferedReader reader;
 	 static PrintWriter writer;
 	 static Socket sock;
-		
+	 static JLabel timer= new JLabel("timer");
 	 
 /*-----------------------------------------------------------------------------*/
 		
 		
 	class StartListener implements ActionListener{  //시작 전 후 를 나누는 버튼에 리스너
 		public void actionPerformed(ActionEvent e){
+			
+			Rule rule=new Rule();
+			rule.go();
+			
+			
 			writer.println(who+" | "+"님이 준비(Ready) 하였습니다.");
             writer.flush();
             start.setEnabled(false);
@@ -78,26 +81,6 @@ public class GUI extends JFrame{
 				addpiece();
 				new ClientNetworking1().go();
 			}
-			}
-	}
-	class LoadListener implements ActionListener{  //시작 전 후 를 나누는 버튼에 리스너
-		public void actionPerformed(ActionEvent e){
-        	
-			}
-	}
-	class ResetListener implements ActionListener{  //시작 전 후 를 나누는 버튼에 리스너
-		public void actionPerformed(ActionEvent e){
-        	
-			}
-	}
-	class LockListener implements ActionListener{  //시작 전 후 를 나누는 버튼에 리스너
-		public void actionPerformed(ActionEvent e){
-			c.lock();
-			}
-	}
-	class UnlockListener implements ActionListener{  //시작 전 후 를 나누는 버튼에 리스너
-		public void actionPerformed(ActionEvent e){
-        	c.unlock();
 			}
 	}
 	
@@ -145,7 +128,7 @@ public class GUI extends JFrame{
        	 }
         public void actionPerformed(ActionEvent e){
         	
-        	if(gaming==1) piece[id].kill(x,y); // 말잡기
+        	if(gaming==1) piece[id].kill(); // 말잡기
         	if(gaming==1) piece[id].postpiece(); // 말상태저장
         	if(gaming==0) piece[id].trans(id); //말변경( 미 구현)
  
@@ -196,6 +179,7 @@ public class GUI extends JFrame{
 	
 	public void addboard() {
 		int aa=0;
+		int ii = 0;
 		for(int x=0; x<7; x++) {
 
 			for(int y=0; y<7; y++) {
@@ -207,6 +191,15 @@ public class GUI extends JFrame{
 				board2[x][y].setSize(90, 90);
 				board2[x][y].setLayout(new FlowLayout());
 				frame.add(board2[x][y]);
+				if (ii < 6) {
+					deathbutton[ii] = new JButton();
+					deathbutton[ii].setPreferredSize(new Dimension(80, 80));
+					deathbutton[ii].setBorderPainted(false);
+					deathbutton[ii].setFocusPainted(false);
+					deathbutton[ii].setContentAreaFilled(false);
+					board2[x][y].add(deathbutton[ii]);
+					ii++;
+				}
 					}
 				}
 				board[x][y] = new JPanel();
@@ -290,16 +283,10 @@ public class GUI extends JFrame{
         frame.add(sendButton);
         /*--------------------------------------------------------------------------------------*/
 		
-		loadbutton = new JButton("load");
-		resetbutton = new JButton("reset");
-		lockbutton = new JButton("lock");
-		unlockbutton= new JButton("unloack");
 		
+        timer.setBounds(850,350,140,60);
 		
-		loadbutton.addActionListener(new LoadListener());
-		resetbutton.addActionListener(new ResetListener());
-		lockbutton.addActionListener(new LockListener());
-		unlockbutton.addActionListener(new UnlockListener());
+	
 		
 		
 		iu= new JPanel();
@@ -307,16 +294,14 @@ public class GUI extends JFrame{
 		iu.setBackground(Color.GRAY);
 	
 		
-		loadbutton.setBounds(900, 140, 100, 40);
-		resetbutton.setBounds(900, 180, 100, 40);
-		lockbutton.setBounds(900, 220, 100, 40);
-		unlockbutton.setBounds(900, 260, 100, 40);
 		start.setBounds(800, 500, 130, 40);
+		frame.add(timer);
 		frame.add(start);
 		frame.add(iu);
 		frame.setSize(1200, 1200);
 		frame.setTitle("Angel and Devil Game");
 		frame.setVisible(true);
+		
 		
 		
 	}

@@ -8,6 +8,7 @@ public class Piece extends GUI {
 	String team;
 	int ascore, dscore;
 	static int count=0,count2=0;
+	static int ii=0;
 	Piece(int x,int y,int id,int state,String team) {
 		this.x = x;
 		this.y = y;
@@ -23,7 +24,7 @@ public class Piece extends GUI {
 				pid = this.id;
 				pteam = who;
 				click++;	
-				piecebutton[pid].setIcon(new ImageIcon("image/" + pteam + "_clik.png"));
+				piecebutton[pid].setIcon(new ImageIcon("image/" + pteam + "_clik.png"));//////
 
 
 				
@@ -58,7 +59,7 @@ public class Piece extends GUI {
 
 			} else {
 				JOptionPane.showMessageDialog(null, "이동범위 밖입니다!");
-				piecebutton[pid].setIcon(new ImageIcon("image/" + turn + ".png"));
+				piecebutton[pid].setIcon(new ImageIcon("image/" + turn + ".png")); /////
 				click = 0;
 
 			}
@@ -73,17 +74,19 @@ public class Piece extends GUI {
 
 	}
 
-	void kill(int x, int y) {
+	void kill() {
 
 	if (click == 1) {
 				if (team == who) {
 					JOptionPane.showMessageDialog(null, "자신의 말은 잡을수 없습니다.");
-					piecebutton[pid].setIcon(new ImageIcon("image/" + pteam + ".png"));
+					piecebutton[pid].setIcon(new ImageIcon("image/" + pteam + ".png")); //////
 				} else if  (((px - 1 == x || x == px + 1) && (py == y )
 						|| ((py - 1 == y || y == py + 1) && (px==x))))  {
 		            try {                            // <--------------------------------------------- 네트워크
 		                writer.println(pid+":"+id);
-		                writer.flush();              
+		                writer.flush();
+		                piece[id].killtrans();
+		                
 		            }
 		            catch (Exception ex) {
 		                ex.printStackTrace();
@@ -96,7 +99,7 @@ public class Piece extends GUI {
 				
 				}else {
 					JOptionPane.showMessageDialog(null, "너무 멀리 있어 잡을수 없습니다!!");
-					piecebutton[pid].setIcon(new ImageIcon("image/" + turn + ".png"));
+					piecebutton[pid].setIcon(new ImageIcon("image/" + turn + ".png"));   ///////
 					
 				}
 
@@ -122,4 +125,36 @@ public class Piece extends GUI {
 		
 
 	}
+	
+
+	public void killtrans() {
+	if(state==0) {
+		if(team.equals("P1")) {
+			deathbutton[ii].setIcon(new ImageIcon("image/" + "P1" + ".png"));
+		}
+		else {
+			deathbutton[ii].setIcon(new ImageIcon("image/" + "P2" + ".png"));
+		}
+		System.out.println(ii);
+		++ii;
+	}
+	else if(state==1) {
+		deathbutton[ii].setIcon(new ImageIcon("image/" + "Devil" + ".png"));
+		System.out.println(ii);
+		++ii;
+		++deathkill;
+		if(deathkill==3) {
+			JOptionPane.showMessageDialog(null, "악마 3마리를 잡으셔서 게임에서 졌습니다");
+			
+		}
+	}
+}
+	
+	
+	
+	
+	
+	
+	
+	
 }
