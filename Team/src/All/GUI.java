@@ -145,7 +145,7 @@ public class GUI extends JFrame{
        	 }
         public void actionPerformed(ActionEvent e){
         	
-        	if(gaming==1) piece[id].kill(x,y); // 말잡기
+        	if(gaming==1) piece[id].kill(); // 말잡기
         	if(gaming==1) piece[id].postpiece(); // 말상태저장
         	if(gaming==0) piece[id].trans(id); //말변경( 미 구현)
  

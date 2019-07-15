@@ -73,7 +73,7 @@ public class Piece extends GUI {
 
 	}
 
-	void kill(int x, int y) {
+	void kill() {
 
 	if (click == 1) {
 				if (team == who) {
