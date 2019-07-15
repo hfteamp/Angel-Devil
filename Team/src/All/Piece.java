@@ -47,7 +47,14 @@ public class Piece extends GUI {
 					|| ((py - 1 == y || y == py + 1) && (px==x)))) {
 	            try {                            // <--------------------------------------------- 네트워크
 	                writer.println(px+":"+py+":"+x+":"+y+":"+pid);
-	                writer.flush();              
+	                writer.flush(); 
+	                if(who=="P1") {  //태현
+	                	writer.println("Player2");  //태현
+	                	writer.flush();     //태현
+	                }else { //태현
+	                	writer.println("Player1");  //태현
+                		writer.flush();    //태현
+	                }
 	            }
 	            catch (Exception ex) {
 	                ex.printStackTrace();
@@ -83,7 +90,14 @@ public class Piece extends GUI {
 						|| ((py - 1 == y || y == py + 1) && (px==x))))  {
 		            try {                            // <--------------------------------------------- 네트워크
 		                writer.println(pid+":"+id);
-		                writer.flush();              
+		                writer.flush();
+		                if(who=="P1") {  //태현
+		                	writer.println("Player2");  //태현
+		                	writer.flush();     //태현
+		                }else  {//태현
+		                	writer.println("Player1");  //태현
+	                		writer.flush();    //태현
+		            }
 		            }
 		            catch (Exception ex) {
 		                ex.printStackTrace();

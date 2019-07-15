@@ -49,16 +49,22 @@ public class GUI extends JFrame{
 /*-----------------------------------------------------------------------------*/
 	 static JTextArea incoming;
 	 static JTextField outgoing;
+	 static JLabel labelturn = new JLabel("player2");  //태현
+	 static JLabel nowturn = new JLabel("현재 턴");  //태현
+	 static JLabel Iam = new JLabel();  //태현
 	 static BufferedReader reader;
 	 static PrintWriter writer;
 	 static Socket sock;
-		
+	 static JLabel timer= new JLabel("timer");
 	 
 /*-----------------------------------------------------------------------------*/
 		
 		
 	class StartListener implements ActionListener{  //시작 전 후 를 나누는 버튼에 리스너
 		public void actionPerformed(ActionEvent e){
+			Rule rule=new Rule();
+			rule.go();
+			
 			writer.println(who+" | "+"님이 준비(Ready) 하였습니다.");
             writer.flush();
             start.setEnabled(false);
@@ -69,11 +75,13 @@ public class GUI extends JFrame{
 		public void actionPerformed(ActionEvent e){
 			if(p1.isSelected()) {
 				who = "P1";
+				Iam.setText("Player1");  //태현
 				frame2.setVisible(false);
 				addpiece();
 				new ClientNetworking1().go();
 			}else if (p2.isSelected()) {
 				who = "P2";
+				Iam.setText("Player2");  //태현
 				frame2.setVisible(false);
 				addpiece();
 				new ClientNetworking1().go();
@@ -233,7 +241,7 @@ public class GUI extends JFrame{
 					piece[aa] = new Piece(x, y, aa,0,"P2");
 					aa++;
 				}
-				board[x][y].setLocation(y * sql,x* sql+40); 
+				board[x][y].setLocation(y * sql,x* sql+60); 
 				board[x][y].setSize(sql, sql);
 				board[x][y].setLayout(new FlowLayout());
 				board[x][y].addMouseListener(new BoardListener(x,y));
@@ -282,9 +290,37 @@ public class GUI extends JFrame{
         outgoing = new JTextField();
         JButton sendButton = new JButton("Send");
         sendButton.addActionListener(new SendButtonListener());
-        qScroller.setBounds(800, 100, 350, 200);
-        outgoing.setBounds(800, 300, 250, 40);
-        sendButton.setBounds(1050, 300, 100, 40);
+        Iam.setBounds(0, 0, 150, 60);  //태현
+        qScroller.setBounds(700, 60, 350, 200);  //태현
+        outgoing.setBounds(700, 260, 250, 40);  //태현
+        sendButton.setBounds(950, 260, 100, 40);  //태현
+        labelturn.setBounds(720, 360, 140, 60);  //태현
+        nowturn.setBounds(720, 310, 140, 60);  //태현
+        timer.setBounds(900,350,140,60);
+        timer.setOpaque(true);  //태현
+        timer.setBackground(Color.DARK_GRAY); 
+        Iam.setOpaque(true);  //태현
+        Iam.setBackground(Color.DARK_GRAY);  //태현
+        nowturn.setOpaque(true);  //태현
+        nowturn.setBackground(Color.DARK_GRAY);  //태현
+        labelturn.setOpaque(true);  //태현
+        labelturn.setBackground(Color.DARK_GRAY);  //태현
+        timer.setFont(new Font("Seif",Font.BOLD,24));  //태현
+        timer.setForeground(Color.GREEN);  //태현
+        labelturn.setFont(new Font("Seif",Font.BOLD,24));  //태현
+        labelturn.setForeground(Color.GREEN);  //태현
+        nowturn.setFont(new Font("Seif",Font.BOLD,24));  //태현
+        nowturn.setForeground(Color.GREEN);  //태현
+        Iam.setFont(new Font("Seif",Font.BOLD,30));  //태현
+        Iam.setForeground(Color.RED);  //태현
+        labelturn.setHorizontalAlignment(JLabel.CENTER);  //태현
+        nowturn.setHorizontalAlignment(JLabel.CENTER);  //태현
+        Iam.setHorizontalAlignment(JLabel.CENTER);  //태현
+        timer.setHorizontalAlignment(JLabel.CENTER);  //태현
+        frame.add(timer);
+        frame.add(Iam);  //태현
+        frame.add(nowturn);  //태현
+        frame.add(labelturn);  //태현
         frame.add(qScroller);
         frame.add(outgoing);
         frame.add(sendButton);
