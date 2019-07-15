@@ -116,7 +116,7 @@ public class GUI extends JFrame {
 					Piece.count--;
 					System.out.println("1로변경");
 				} else if (piece[id].state == 1) {
-					JOptionPane.showMessageDialog(null, "딴거 눌러 시발련아.");
+					JOptionPane.showMessageDialog(null, "이미 악마입니다.");
 
 				}
 

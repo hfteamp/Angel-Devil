@@ -8,7 +8,8 @@ public class Piece extends GUI {
 	String team;
 	int ascore, dscore;
 	static int count = 3, count2 = 0;
-	static int ii=0;
+	static int ii = 0;
+
 	Piece(int x, int y, int id, int state, String team) {
 		this.x = x;
 		this.y = y;
@@ -25,9 +26,10 @@ public class Piece extends GUI {
 				pid = this.id;
 				pteam = this.team;
 				click++;
-				if (state == 1) {
-					piecebutton[pid].setIcon(new ImageIcon("image/" + pteam + "_Devil" + "_clik.png"));
-				}
+				/*
+				 * if (state == 1) { piecebutton[pid].setIcon(new ImageIcon("image/" + pteam +
+				 * "_Devil" + "_clik.png")); }
+				 */
 				piecebutton[pid].setIcon(new ImageIcon("image/" + pteam + "_clik.png"));
 
 			} else if (killed == 1) {
@@ -54,12 +56,13 @@ public class Piece extends GUI {
 
 			} else {
 				JOptionPane.showMessageDialog(null, "범위 아웃");
-				if (state == 1) {
-					piecebutton[pid].setIcon(new ImageIcon("image/" + turn + "_Devil" + ".png"));
-				}
+				
+				/*
+				 * if (state == 1) { piecebutton[pid].setIcon(new ImageIcon("image/" + turn +
+				 * "_Devil" + ".png")); }
+				 */
 				piecebutton[pid].setIcon(new ImageIcon("image/" + turn + ".png"));
 				click = 0;
-
 			}
 
 		} else {
@@ -74,11 +77,16 @@ public class Piece extends GUI {
 		if (click == 1) {
 			if (team == turn) {
 				JOptionPane.showMessageDialog(null, "자신의 말은 잡을수 없습니다.");
-				if (state == 1) {
-					piecebutton[pid].setIcon(new ImageIcon("image/" + pteam + "_Devil" + ".png"));
-				}
 				piecebutton[pid].setIcon(new ImageIcon("image/" + pteam + ".png"));
 				click = 0;
+				/*
+				 * if (state == 1) { piecebutton[pid].setIcon(new ImageIcon("image/" + pteam +
+				 * "_Devil" + ".png")); }
+				 */
+				/*(((px - 1 == x || x == px + 1) 
+				 * && (py - 1 != y && y != py + 1))
+						|| ((py - 1 == y || y == py + 1) 
+						&& (px - 1 != x && x != px + 1))) {*/
 			} else if (((px - 1 == piece[id].x || piece[id].x == px + 1)
 					&& (py - 1 != piece[id].y && piece[id].y != py + 1))
 					|| ((py - 1 == piece[id].y || piece[id].y == py + 1)
@@ -86,7 +94,7 @@ public class Piece extends GUI {
 				try { // <--------------------------------------------- 네트워크
 					writer.println(pid + ":" + id);
 					writer.flush();
-						piece[id].killtrans();
+					piece[id].killtrans();
 				} catch (Exception ex) {
 					ex.printStackTrace();
 				} // <--------------------------------------------- 네트워크
@@ -99,32 +107,36 @@ public class Piece extends GUI {
 				piecebutton[pid].setIcon(new ImageIcon("image/" + turn + ".png"));
 				click = 0;
 
-				if (state == 1) {
-					piecebutton[pid].setIcon(new ImageIcon("image/" + turn + "_Devil" + ".png"));
-				}
-				piecebutton[pid].setIcon(new ImageIcon("image/" + turn + ".png"));
-				click = 0;
+				/*
+				 * if (state == 1) { piecebutton[pid].setIcon(new ImageIcon("image/" + turn +
+				 * "_Devil" + ".png")); } piecebutton[pid].setIcon(new ImageIcon("image/" + turn
+				 * + ".png"));
+				 */
 			}
 
 		}
 
 	}
+
 	void win(int id, int x, int y) {
-		
+
 	}
-	
+
 	void trans(int id) {
-		
+
 		piecebutton[id].setIcon(new ImageIcon("image/" + turn + "_Devil" + ".png"));
-		
-		
+
 	}
 
 	public void killtrans() {
 	if(state==0) {
-		deathbutton[ii].setIcon(new ImageIcon("image/" + "Angel" + ".png"));
+		if(team.equals("P1")) {
+			deathbutton[ii].setIcon(new ImageIcon("image/" + "P1" + ".png"));
+			++ii;
+		}else {
+		deathbutton[ii].setIcon(new ImageIcon("image/" + "P2" + ".png"));
 		System.out.println(ii);
-		++ii;
+		++ii;}
 	}
 	else if(state==1) {
 		deathbutton[ii].setIcon(new ImageIcon("image/" + "Devil" + ".png"));
@@ -137,8 +149,5 @@ public class Piece extends GUI {
 		
 	}
 }
-	
-	
 
-	
 }
