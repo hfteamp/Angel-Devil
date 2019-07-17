@@ -8,51 +8,110 @@ import java.io.BufferedReader;
 import java.io.PrintWriter;
 import java.net.Socket;
 
-
 public class GUI extends JFrame {
+	static JFrame frame;
+	static JFrame frame2;
 	static JPanel board[][] = new JPanel[7][7];
+	static JPanel board2[][] = new JPanel[2][3];
 	static JButton piecebutton[] = new JButton[14];
-	static JButton deathbutton[] = new JButton[6];
-	JFrame frame;
-	JPanel board2[][] = new JPanel[2][3];
-	JPanel iu;
-	JTextArea chat;
-	JTextField input;
-	JButton submit;
-	JButton start = new JButton("시작");
-	JButton p1 = new JButton("P1");
-	JButton p2 = new JButton("P2");;
+	static JPanel iu;
+	static JPanel iu2;
+	static JTextArea chat;
+	static JTextField input;
+	static JButton submit;
+	static JButton savebutton;
+	static JRadioButton p1 = new JRadioButton("플레이어1");
+	static JRadioButton p2 = new JRadioButton("플레이어2");
+	ButtonGroup gp = new ButtonGroup();
+	static JButton loadbutton;
+	static JButton resetbutton;
+	static JButton lockbutton;
+	static JButton unlockbutton;
+	static JButton start = new JButton("준비(Ready)");
+	static JButton deathbutton[] = new JButton[5];
+	int sql = 100;
 	static int click = 0;
 	static int pid;
 	static int px, py;
-	static int who;
+
 	static String pteam;
 	static String turn = "P2";
 	static Piece piece[] = new Piece[14];
 	static Piece p;
-
+	static ChangeImage c = new ChangeImage();
 	ImageIcon P1icon = new ImageIcon("image/P1.png");
 	ImageIcon P2icon = new ImageIcon("image/P2.png");
-	int sql = 100;
 	int gaming;
 	int killed;
+	static String who;
 	int state;
 	int deathkill = 0;
 	/*-----------------------------------------------------------------------------*/
 	static JTextArea incoming;
 	static JTextField outgoing;
+	static JLabel labelturn = new JLabel("player2"); // 태현
+	static JLabel nowturn = new JLabel("현재 턴"); // 태현
+	static JLabel Iam = new JLabel(); // 태현
 	static BufferedReader reader;
 	static PrintWriter writer;
 	static Socket sock;
+	static JLabel timer = new JLabel("timer");
 
 	/*-----------------------------------------------------------------------------*/
 
 	class StartListener implements ActionListener { // 시작 전 후 를 나누는 버튼에 리스너
 		public void actionPerformed(ActionEvent e) {
+			Rule rule = new Rule();
+			rule.go();
+
+			writer.println(who + " | " + "님이 준비(Ready) 하였습니다.");
+			writer.flush();
+			start.setEnabled(false);
 			gaming = 1;
 		}
 	}
 
+	class SaveListener implements ActionListener { // 시작 전 후 를 나누는 버튼에 리스너
+		public void actionPerformed(ActionEvent e) {
+			if (p1.isSelected()) {
+				who = "P1";
+				Iam.setText("Player1"); // 태현
+				frame2.setVisible(false);
+				addpiece();
+				new ClientNetworking1().go();
+			} else if (p2.isSelected()) {
+				who = "P2";
+				Iam.setText("Player2"); // 태현
+				frame2.setVisible(false);
+				addpiece();
+				new ClientNetworking1().go();
+			}
+		}
+	}
+
+	class LoadListener implements ActionListener { // 시작 전 후 를 나누는 버튼에 리스너
+		public void actionPerformed(ActionEvent e) {
+
+		}
+	}
+
+	class ResetListener implements ActionListener { // 시작 전 후 를 나누는 버튼에 리스너
+		public void actionPerformed(ActionEvent e) {
+
+		}
+	}
+
+	class LockListener implements ActionListener { // 시작 전 후 를 나누는 버튼에 리스너
+		public void actionPerformed(ActionEvent e) {
+			c.lock();
+		}
+	}
+
+	class UnlockListener implements ActionListener { // 시작 전 후 를 나누는 버튼에 리스너
+		public void actionPerformed(ActionEvent e) {
+			c.unlock();
+		}
+	}
 
 	class BoardListener implements MouseListener {
 		int x, y;
@@ -129,7 +188,7 @@ public class GUI extends JFrame {
 	public class SendButtonListener implements ActionListener {
 		public void actionPerformed(ActionEvent ev) {
 			try {
-				writer.println(outgoing.getText());
+				writer.println(who + " | " + outgoing.getText());
 				writer.flush();
 
 			} catch (Exception ex) {
@@ -140,11 +199,37 @@ public class GUI extends JFrame {
 		}
 	}
 
+	public void login() {
+
+		gp.add(p1);
+		gp.add(p2);
+		p1.setBounds(20, 20, 150, 50);
+		p2.setBounds(20, 80, 150, 50);
+
+		savebutton = new JButton("시작");
+		savebutton.setBounds(250, 50, 100, 50);
+
+		iu2 = new JPanel();
+		iu2.setLayout(null);
+		iu2.setBackground(Color.GRAY);
+
+		frame2 = new JFrame();
+		frame2.setLayout(new BorderLayout());
+		frame2.setSize(400, 200);
+		frame2.setTitle("Angel and Devil Game");
+		frame2.setVisible(true);
+		savebutton.addActionListener(new SaveListener());
+		iu2.add(savebutton);
+		iu2.add(p1);
+		iu2.add(p2);
+		frame2.add(iu2);
+	}
+
 	public void addboard() {
 		int aa = 0;
 		int ii = 0;
 		for (int x = 0; x < 7; x++) {
-		for (int y = 0; y < 7; y++) {
+			for (int y = 0; y < 7; y++) {
 				if (x < 2) {
 					if (y < 3) {
 						board2[x][y] = new JPanel();
@@ -177,18 +262,18 @@ public class GUI extends JFrame {
 				if (x == 0) {
 					piecebutton[aa].setIcon(P1icon);
 					board[x][y].add(piecebutton[aa]);
-					piecebutton[aa].addActionListener(new PieceListener(x, y, aa,state,"P1"));
+					piecebutton[aa].addActionListener(new PieceListener(x, y, aa, state, "P1"));
 					piece[aa] = new Piece(x, y, aa, 0, "P1");
 					aa++;
 				}
 				if (x == 6) {
 					piecebutton[aa].setIcon(P2icon);
 					board[x][y].add(piecebutton[aa]);
-					piecebutton[aa].addActionListener(new PieceListener(x, y, aa,state, "P2"));
+					piecebutton[aa].addActionListener(new PieceListener(x, y, aa, state, "P2"));
 					piece[aa] = new Piece(x, y, aa, 0, "P2");
 					aa++;
 				}
-				board[x][y].setLocation(y * sql, x * sql + 40);
+				board[x][y].setLocation(y * sql, x * sql + 60);
 				board[x][y].setSize(sql, sql);
 				board[x][y].setLayout(new FlowLayout());
 				board[x][y].addMouseListener(new BoardListener(x, y));
@@ -219,6 +304,7 @@ public class GUI extends JFrame {
 
 	public void addgui() {
 		/*---------------------------------------------------------------------*/
+
 		incoming = new JTextArea();
 		incoming.setLineWrap(true);
 		incoming.setWrapStyleWord(true);
@@ -229,18 +315,60 @@ public class GUI extends JFrame {
 		outgoing = new JTextField();
 		JButton sendButton = new JButton("Send");
 		sendButton.addActionListener(new SendButtonListener());
-		qScroller.setBounds(800, 100, 350, 200);
-		outgoing.setBounds(800, 300, 250, 40);
-		sendButton.setBounds(1050, 300, 100, 40);
+		Iam.setBounds(0, 0, 150, 60); // 태현
+		qScroller.setBounds(700, 60, 350, 200); // 태현
+		outgoing.setBounds(700, 260, 250, 40); // 태현
+		sendButton.setBounds(950, 260, 100, 40); // 태현
+		labelturn.setBounds(720, 360, 140, 60); // 태현
+		nowturn.setBounds(720, 310, 140, 60); // 태현
+		timer.setBounds(900, 350, 140, 60);
+		timer.setOpaque(true); // 태현
+		timer.setBackground(Color.DARK_GRAY);
+		Iam.setOpaque(true); // 태현
+		Iam.setBackground(Color.DARK_GRAY); // 태현
+		nowturn.setOpaque(true); // 태현
+		nowturn.setBackground(Color.DARK_GRAY); // 태현
+		labelturn.setOpaque(true); // 태현
+		labelturn.setBackground(Color.DARK_GRAY); // 태현
+		timer.setFont(new Font("Seif", Font.BOLD, 24)); // 태현
+		timer.setForeground(Color.GREEN); // 태현
+		labelturn.setFont(new Font("Seif", Font.BOLD, 24)); // 태현
+		labelturn.setForeground(Color.GREEN); // 태현
+		nowturn.setFont(new Font("Seif", Font.BOLD, 24)); // 태현
+		nowturn.setForeground(Color.GREEN); // 태현
+		Iam.setFont(new Font("Seif", Font.BOLD, 30)); // 태현
+		Iam.setForeground(Color.RED); // 태현
+		labelturn.setHorizontalAlignment(JLabel.CENTER); // 태현
+		nowturn.setHorizontalAlignment(JLabel.CENTER); // 태현
+		Iam.setHorizontalAlignment(JLabel.CENTER); // 태현
+		timer.setHorizontalAlignment(JLabel.CENTER); // 태현
+		frame.add(timer);
+		frame.add(Iam); // 태현
+		frame.add(nowturn); // 태현
+		frame.add(labelturn); // 태현
 		frame.add(qScroller);
 		frame.add(outgoing);
 		frame.add(sendButton);
 		/*--------------------------------------------------------------------------------------*/
 
+		loadbutton = new JButton("load");
+		resetbutton = new JButton("reset");
+		lockbutton = new JButton("lock");
+		unlockbutton = new JButton("unloack");
+
+		loadbutton.addActionListener(new LoadListener());
+		resetbutton.addActionListener(new ResetListener());
+		lockbutton.addActionListener(new LockListener());
+		unlockbutton.addActionListener(new UnlockListener());
+
 		iu = new JPanel();
 		iu.setLayout(null);
 		iu.setBackground(Color.GRAY);
 
+		loadbutton.setBounds(900, 140, 100, 40);
+		resetbutton.setBounds(900, 180, 100, 40);
+		lockbutton.setBounds(900, 220, 100, 40);
+		unlockbutton.setBounds(900, 260, 100, 40);
 		start.setBounds(800, 500, 100, 40);
 		p1.setBounds(900, 600, 100, 40);
 		p2.setBounds(900, 650, 100, 40);
@@ -255,9 +383,9 @@ public class GUI extends JFrame {
 	}
 
 	public static void main(String[] args) {
-		new ClientNetworking().go();
+
 		GUI gui = new GUI();
-		gui.addpiece();
+		gui.login();
 
 	}
 }

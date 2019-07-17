@@ -20,11 +20,11 @@ public class Piece extends GUI {
 
 	void postpiece() {
 		if (click == 0) {
-			if (team == turn) {
+			if (who == turn && who == team) {
 				px = this.x;
 				py = this.y;
 				pid = this.id;
-				pteam = this.team;
+				pteam = who;
 				click++;
 				/*
 				 * if (state == 1) { piecebutton[pid].setIcon(new ImageIcon("image/" + pteam +
@@ -38,25 +38,33 @@ public class Piece extends GUI {
 			} else {
 				JOptionPane.showMessageDialog(null, "순서가 아닙니다.");
 			}
-		}
+
+		} else
+			click = 0;
 
 	}
 
 	public void move(int x, int y) {
 
 		if (click == 1) {
-			if (((px - 1 == x || x == px + 1) && (py - 1 != y && y != py + 1))
-					|| ((py - 1 == y || y == py + 1) && (px - 1 != x && x != px + 1))) {
+			if (((px - 1 == x || x == px + 1) && (py == y) || ((py - 1 == y || y == py + 1) && (px == x)))) {
 				try { // <--------------------------------------------- 네트워크
-					writer.println(px + ":" + py + ":" + x + ":" + y + ":" + pid + ":" + state);
+					writer.println(px + ":" + py + ":" + x + ":" + y + ":" + pid);
 					writer.flush();
+					if (who == "P1") { // 태현
+						writer.println("Player2"); // 태현
+						writer.flush(); // 태현
+					} else { // 태현
+						writer.println("Player1"); // 태현
+						writer.flush(); // 태현
+					}
 				} catch (Exception ex) {
 					ex.printStackTrace();
 				} // <--------------------------------------------- 네트워크
 
 			} else {
-				JOptionPane.showMessageDialog(null, "범위 아웃");
-				
+				JOptionPane.showMessageDialog(null, "이동범위 밖입니다!");
+
 				/*
 				 * if (state == 1) { piecebutton[pid].setIcon(new ImageIcon("image/" + turn +
 				 * "_Devil" + ".png")); }
@@ -66,7 +74,7 @@ public class Piece extends GUI {
 			}
 
 		} else {
-			JOptionPane.showMessageDialog(null, "말을 먼저 선택");
+			JOptionPane.showMessageDialog(null, "말을 먼저 선택해주세요!");
 			click = 0;
 		}
 
@@ -75,26 +83,20 @@ public class Piece extends GUI {
 	void kill() {
 
 		if (click == 1) {
-			if (team == turn) {
+			if (team == who) {
 				JOptionPane.showMessageDialog(null, "자신의 말은 잡을수 없습니다.");
 				piecebutton[pid].setIcon(new ImageIcon("image/" + pteam + ".png"));
-				click = 0;
-				/*
-				 * if (state == 1) { piecebutton[pid].setIcon(new ImageIcon("image/" + pteam +
-				 * "_Devil" + ".png")); }
-				 */
-				/*(((px - 1 == x || x == px + 1) 
-				 * && (py - 1 != y && y != py + 1))
-						|| ((py - 1 == y || y == py + 1) 
-						&& (px - 1 != x && x != px + 1))) {*/
-			} else if (((px - 1 == piece[id].x || piece[id].x == px + 1)
-					&& (py - 1 != piece[id].y && piece[id].y != py + 1))
-					|| ((py - 1 == piece[id].y || piece[id].y == py + 1)
-							&& (px - 1 != piece[id].x && piece[id].x != px + 1))) {
+			} else if (((px - 1 == x || x == px + 1) && (py == y) || ((py - 1 == y || y == py + 1) && (px == x)))) {
 				try { // <--------------------------------------------- 네트워크
 					writer.println(pid + ":" + id);
 					writer.flush();
-					piece[id].killtrans();
+					if (who == "P1") { // 태현
+						writer.println("Player2"); // 태현
+						writer.flush(); // 태현
+					} else {// 태현
+						writer.println("Player1"); // 태현
+						writer.flush(); // 태현
+					}
 				} catch (Exception ex) {
 					ex.printStackTrace();
 				} // <--------------------------------------------- 네트워크
@@ -103,17 +105,16 @@ public class Piece extends GUI {
 				killed = 1;
 
 			} else {
-				JOptionPane.showMessageDialog(null, "이동범위 벗어났습니다.");
+				JOptionPane.showMessageDialog(null, "너무 멀리 있어 잡을수 없습니다!!");
 				piecebutton[pid].setIcon(new ImageIcon("image/" + turn + ".png"));
-				click = 0;
 
-				/*
-				 * if (state == 1) { piecebutton[pid].setIcon(new ImageIcon("image/" + turn +
-				 * "_Devil" + ".png")); } piecebutton[pid].setIcon(new ImageIcon("image/" + turn
-				 * + ".png"));
-				 */
 			}
 
+			/*
+			 * if (state == 1) { piecebutton[pid].setIcon(new ImageIcon("image/" + turn +
+			 * "_Devil" + ".png")); } piecebutton[pid].setIcon(new ImageIcon("image/" + turn
+			 * + ".png"));
+			 */
 		}
 
 	}
@@ -129,25 +130,25 @@ public class Piece extends GUI {
 	}
 
 	public void killtrans() {
-	if(state==0) {
-		if(team.equals("P1")) {
-			deathbutton[ii].setIcon(new ImageIcon("image/" + "P1" + ".png"));
+		if (state == 0) {
+			if (team.equals("P1")) {
+				deathbutton[ii].setIcon(new ImageIcon("image/" + "P1" + ".png"));
+				++ii;
+			} else {
+				deathbutton[ii].setIcon(new ImageIcon("image/" + "P2" + ".png"));
+				System.out.println(ii);
+				++ii;
+			}
+		} else if (state == 1) {
+			deathbutton[ii].setIcon(new ImageIcon("image/" + "Devil" + ".png"));
+			System.out.println(ii);
 			++ii;
-		}else {
-		deathbutton[ii].setIcon(new ImageIcon("image/" + "P2" + ".png"));
-		System.out.println(ii);
-		++ii;}
+			++deathkill;
+		}
+		if (deathkill == 3) {
+			JOptionPane.showMessageDialog(null, "악마 3마리를 잡으셔서 게임에서 졌습니다");
+
+		}
 	}
-	else if(state==1) {
-		deathbutton[ii].setIcon(new ImageIcon("image/" + "Devil" + ".png"));
-		System.out.println(ii);
-		++ii;
-		++deathkill;
-	}
-	if(deathkill==3) {
-		JOptionPane.showMessageDialog(null, "악마 3마리를 잡으셔서 게임에서 졌습니다");
-		
-	}
-}
 
 }
