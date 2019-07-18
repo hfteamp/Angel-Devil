@@ -3,6 +3,7 @@ package All;
 import javax.swing.JOptionPane;
 
 public class Rule extends GUI {
+	static int time=15;
 	 public void go() {
 	Thread timerThread = new Thread(new ruletime());
 	timerThread.start();
@@ -13,21 +14,27 @@ public class Rule extends GUI {
         	
 		try{
 			
-		for(int a=30; a>=0; a--) {
+		for(; ; time--) {
 			
-			writer.println(Integer.toString(a)+":"+" "+":"+" ");
+			writer.println(Integer.toString(time)+":"+" "+":"+" ");
             writer.flush();			
 			Thread.sleep(1000);
-			if(a==0) {
-				if (turn == "P2") {
+			if(time==0) {
+				if(turn == "P2") {
+					writer.println("change"+":"+" "+":"+" ");
+		            writer.flush();			
 					writer.println("Player1");
+		            writer.flush();	
+					
+				}else {
+					writer.println("change"+":"+" "+":"+" ");
 		            writer.flush();		
-					turn = "P1";
-				} else {
 					writer.println("Player2");
 		            writer.flush();		
 					turn = "P2";
+				
 				}	
+				Rule.time = 16;
 				JOptionPane.showMessageDialog(null, "시간이 초과되었습니다.");
 			}
 

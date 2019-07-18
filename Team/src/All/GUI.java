@@ -51,18 +51,29 @@ public class GUI extends JFrame {
 	static PrintWriter writer;
 	static Socket sock;
 	static JLabel timer = new JLabel("timer");
+	static int timercount;
 
 	/*-----------------------------------------------------------------------------*/
 
 	class StartListener implements ActionListener { // 시작 전 후 를 나누는 버튼에 리스너
 		public void actionPerformed(ActionEvent e) {
-			Rule rule = new Rule();
-			rule.go();
+			
 
+			if(Piece.count==0) {
 			writer.println(who + " | " + "님이 준비(Ready) 하였습니다.");
 			writer.flush();
+			writer.println(" "+ ":" +" "+ ":" +" "+ ":" +" "+ ":" +" "+ ":" + " ");
+			writer.flush();
+			JOptionPane.showMessageDialog(null, "상대방이 준비완료되면 바로 시작합니다.");
+			if(timercount == 2) {
+				Rule rule = new Rule();
+				rule.go();
+			}
 			start.setEnabled(false);
 			gaming = 1;
+			}else {
+				JOptionPane.showMessageDialog(null, "자신의 악마 3마리를 정해주세요");
+			}
 		}
 	}
 
@@ -137,19 +148,29 @@ public class GUI extends JFrame {
 			if (gaming == 1)
 				piece[id].postpiece(); // 말상태저장
 
-			if (gaming == 0 && Piece.count > 0) {
-
-				piece[id].trans(id); // 말변경( 미 구현)
-
+			
+			if (gaming == 0) {
+				if(piece[id].team==who) {
+				if(Piece.count!=0) {
 				if (piece[id].state == 0) {
+					piece[id].trans(id);
 					piece[id].state = 1;
 					Piece.count--;
-					System.out.println("1로변경");
-				} else if (piece[id].state == 1) {
-					JOptionPane.showMessageDialog(null, "이미 악마입니다.");
-
+				} else if(piece[id].state == 1) {
+					piece[id].trans(id);
+					piece[id].state = 0;
+					Piece.count++;
 				}
-
+				}else if (piece[id].state == 0) {
+					JOptionPane.showMessageDialog(null, "최대 악마 수는 3마리입니다.");
+				}else if(piece[id].state == 1) {
+					piece[id].trans(id);
+					piece[id].state = 0;
+					Piece.count++;
+				}
+				}else {
+					JOptionPane.showMessageDialog(null, "자신의 말만 악마로 변경할수있습니다..!");
+				}
 			}
 
 		}
