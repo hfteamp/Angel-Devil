@@ -83,9 +83,12 @@ public class ClientNetworking1 extends GUI {
 		    						turn = "P2";
 		    					}	
 
-		                    }else
-	                	incoming.append(message + "\n");
-
+	                    }else if(a.length==1){
+	                    	
+	                    	timer.setText(a[0]);
+	                    }else {
+	                    	incoming.append(message + "\n");
+	                    }
 	                }
 	            } catch (IOException ex)
 	            {

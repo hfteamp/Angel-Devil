@@ -93,9 +93,11 @@ public class Piece extends GUI {
 					if (who == "P1") { // 태현
 						writer.println("Player2"); // 태현
 						writer.flush(); // 태현
+						piece[id].killtrans();
 					} else {// 태현
 						writer.println("Player1"); // 태현
 						writer.flush(); // 태현
+						piece[id].killtrans();
 					}
 				} catch (Exception ex) {
 					ex.printStackTrace();
@@ -130,25 +132,25 @@ public class Piece extends GUI {
 	}
 
 	public void killtrans() {
-		if (state == 0) {
-			if (team.equals("P1")) {
-				deathbutton[ii].setIcon(new ImageIcon("image/" + "P1" + ".png"));
-				++ii;
-			} else {
-				deathbutton[ii].setIcon(new ImageIcon("image/" + "P2" + ".png"));
-				System.out.println(ii);
-				++ii;
-			}
-		} else if (state == 1) {
-			deathbutton[ii].setIcon(new ImageIcon("image/" + "Devil" + ".png"));
-			System.out.println(ii);
-			++ii;
-			++deathkill;
+	if(state==0) {
+		if(team.equals("P1")) {
+			deathbutton[ii].setIcon(new ImageIcon("image/" + "P1" + ".png"));
 		}
-		if (deathkill == 3) {
+		else {
+			deathbutton[ii].setIcon(new ImageIcon("image/" + "P2" + ".png"));
+		}
+		System.out.println(ii);
+		++ii;
+	}
+	else if(state==1) {
+		deathbutton[ii].setIcon(new ImageIcon("image/" + "Devil" + ".png"));
+		System.out.println(ii);
+		++ii;
+		++deathkill;
+		if(deathkill==3) {
 			JOptionPane.showMessageDialog(null, "악마 3마리를 잡으셔서 게임에서 졌습니다");
-
+			
 		}
 	}
-
+}
 }

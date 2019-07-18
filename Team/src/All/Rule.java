@@ -13,7 +13,7 @@ public class Rule extends GUI {
         	
 		try{
 			
-		for(int a=3; a>=0; a--) {
+		for(int a=30; a>=0; a--) {
 			
 			writer.println(Integer.toString(a)+":"+" "+":"+" ");
             writer.flush();			
@@ -30,6 +30,7 @@ public class Rule extends GUI {
 				}	
 				JOptionPane.showMessageDialog(null, "시간이 초과되었습니다.");
 			}
+
 		}
 	} catch(InterruptedException e) {
 		e.printStackTrace();

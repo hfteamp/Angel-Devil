@@ -23,17 +23,12 @@ public class GUI extends JFrame {
 	static JRadioButton p1 = new JRadioButton("플레이어1");
 	static JRadioButton p2 = new JRadioButton("플레이어2");
 	ButtonGroup gp = new ButtonGroup();
-	static JButton loadbutton;
-	static JButton resetbutton;
-	static JButton lockbutton;
-	static JButton unlockbutton;
 	static JButton start = new JButton("준비(Ready)");
-	static JButton deathbutton[] = new JButton[5];
+	static JButton deathbutton[] = new JButton[6];
 	int sql = 100;
 	static int click = 0;
 	static int pid;
 	static int px, py;
-
 	static String pteam;
 	static String turn = "P2";
 	static Piece piece[] = new Piece[14];
@@ -45,7 +40,7 @@ public class GUI extends JFrame {
 	int killed;
 	static String who;
 	int state;
-	int deathkill = 0;
+	static int deathkill = 0;
 	/*-----------------------------------------------------------------------------*/
 	static JTextArea incoming;
 	static JTextField outgoing;
@@ -86,30 +81,6 @@ public class GUI extends JFrame {
 				addpiece();
 				new ClientNetworking1().go();
 			}
-		}
-	}
-
-	class LoadListener implements ActionListener { // 시작 전 후 를 나누는 버튼에 리스너
-		public void actionPerformed(ActionEvent e) {
-
-		}
-	}
-
-	class ResetListener implements ActionListener { // 시작 전 후 를 나누는 버튼에 리스너
-		public void actionPerformed(ActionEvent e) {
-
-		}
-	}
-
-	class LockListener implements ActionListener { // 시작 전 후 를 나누는 버튼에 리스너
-		public void actionPerformed(ActionEvent e) {
-			c.lock();
-		}
-	}
-
-	class UnlockListener implements ActionListener { // 시작 전 후 를 나누는 버튼에 리스너
-		public void actionPerformed(ActionEvent e) {
-			c.unlock();
 		}
 	}
 
@@ -304,7 +275,6 @@ public class GUI extends JFrame {
 
 	public void addgui() {
 		/*---------------------------------------------------------------------*/
-
 		incoming = new JTextArea();
 		incoming.setLineWrap(true);
 		incoming.setWrapStyleWord(true);
@@ -350,25 +320,12 @@ public class GUI extends JFrame {
 		frame.add(outgoing);
 		frame.add(sendButton);
 		/*--------------------------------------------------------------------------------------*/
-
-		loadbutton = new JButton("load");
-		resetbutton = new JButton("reset");
-		lockbutton = new JButton("lock");
-		unlockbutton = new JButton("unloack");
-
-		loadbutton.addActionListener(new LoadListener());
-		resetbutton.addActionListener(new ResetListener());
-		lockbutton.addActionListener(new LockListener());
-		unlockbutton.addActionListener(new UnlockListener());
+		timer.setBounds(850, 350, 140, 60);
 
 		iu = new JPanel();
 		iu.setLayout(null);
 		iu.setBackground(Color.GRAY);
 
-		loadbutton.setBounds(900, 140, 100, 40);
-		resetbutton.setBounds(900, 180, 100, 40);
-		lockbutton.setBounds(900, 220, 100, 40);
-		unlockbutton.setBounds(900, 260, 100, 40);
 		start.setBounds(800, 500, 100, 40);
 		p1.setBounds(900, 600, 100, 40);
 		p2.setBounds(900, 650, 100, 40);
