@@ -128,7 +128,29 @@ public class Piece extends GUI {
 		
 	}
 }
-	
+	public void win() {
+		if (id<7){
+			if(x==6 && y==0) {
+				JOptionPane.showMessageDialog(null, "ifP1이 졌습니다.");
+				System.out.println("ifP1짐");
+				
+			}
+			if(x==6&&y==6) {
+				JOptionPane.showMessageDialog(null, "elseP1이 졌습니다.");
+				System.out.println("ㄷP2짐");
+			}
+		}
+		if (id>7){
+			if (x==0&&y==0) {
+				JOptionPane.showMessageDialog(null, "ifP2가 졌습니다.");
+				System.out.println("ifP2짐");
+			} if(x==0&&y==6) {
+				JOptionPane.showMessageDialog(null, "elseP2가 졌습니다.");
+				System.out.println("ㄷP2짐");
+			}
+		}
+		
+	}
 	
 
 	

@@ -9,6 +9,7 @@ import java.io.PrintWriter;
 import java.net.Socket;
 
 public class GUI extends JFrame {
+	 int gaming1;
 	static JPanel board[][] = new JPanel[7][7];
 	static JButton piecebutton[] = new JButton[14];
 	static JButton deathbutton[] = new JButton[6];
@@ -98,8 +99,13 @@ public class GUI extends JFrame {
 
 			if (gaming == 1)
 				piece[id].kill(); // 말잡기
-			if (gaming == 1)
-				piece[id].postpiece(); // 말상태저장
+		
+				piece[id].postpiece();
+			if (gaming==1) 
+				piece[id].win();
+		
+					
+			// 말상태저장
 			if (gaming == 0)
 				piece[id].trans(id); // 말변경( 미 구현)
 
@@ -155,6 +161,7 @@ public class GUI extends JFrame {
 				} else if (x % 2 != 0 && y % 2 != 0) {
 					board[x][y].setBackground(Color.black);
 				}
+
 				if (x == 0) {
 					piecebutton[aa].setIcon(P1icon);
 					board[x][y].add(piecebutton[aa]);
