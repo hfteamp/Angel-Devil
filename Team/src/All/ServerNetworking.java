@@ -41,16 +41,12 @@ public class ServerNetworking extends GUI {
 		}
 	}
 
-	public static void main(String[] args) {
-
-		new ServerNetworking().go();
-	}
-
 	public void go() {
 
 		clientOutputStreams = new ArrayList();
 
 		try {
+			
 			ServerSocket serverSock = new ServerSocket(5000);
 			while (true) {
 				Socket clientSocket = serverSock.accept();
@@ -59,6 +55,7 @@ public class ServerNetworking extends GUI {
 
 				Thread t = new Thread(new ClientHandler(clientSocket));
 				t.start();
+				
 			}
 		} catch (Exception ex) {
 			ex.printStackTrace();
