@@ -21,7 +21,7 @@ public class ClientNetworking1 extends GUI {
 	 
 	  private void setUpNetworking() {
 	        try {
-	            sock = new Socket("127.0.0.1", 5000);
+	            sock = new Socket(ServerIP, 5000);
 	            InputStreamReader streamReader = new InputStreamReader(sock.getInputStream());
 	            reader = new BufferedReader(streamReader);
 	            writer = new PrintWriter(sock.getOutputStream());

@@ -11,19 +11,29 @@ import java.net.Socket;
 public class GUI extends JFrame {
 	static JFrame frame;
 	static JFrame frame2;
+	static JFrame frame3; //  서버,클라이언트
+	static JFrame frame4; //  서버,클라이언트
 	static JPanel board[][] = new JPanel[7][7];
 	static JPanel board2[][] = new JPanel[2][3];
 	static JButton piecebutton[] = new JButton[14];
 	static JPanel iu;
 	static JPanel iu2;
+	static JPanel iu3;
+	static JPanel iu4;
 	static JTextArea chat;
 	static JTextField input;
+	static JTextField ip;
 	static JButton submit;
 	static JButton savebutton;
 	static JRadioButton p1 = new JRadioButton("플레이어1");
-	static JRadioButton p2 = new JRadioButton("플레이어2");
+	static JRadioButton p2 = new JRadioButton("플레이어2(선공)");
+	static JRadioButton server = new JRadioButton("서버");
+	static JRadioButton client = new JRadioButton("클라이언트");
 	ButtonGroup gp = new ButtonGroup();
+	ButtonGroup sc = new ButtonGroup();
 	static JButton start = new JButton("준비(Ready)");
+	static JButton choice = new JButton("선택");
+	static JButton setting = new JButton("설정");
 	static JButton deathbutton[] = new JButton[6];
 	int sql = 100;
 	static int click = 0;
@@ -33,6 +43,7 @@ public class GUI extends JFrame {
 	static String turn = "P2";
 	static Piece piece[] = new Piece[14];
 	static Piece p;
+	static String ServerIP = "127.0.0.1";
 	ImageIcon P1icon = new ImageIcon("image/P1.png");
 	ImageIcon P2icon = new ImageIcon("image/P2.png");
 	int gaming;
@@ -73,6 +84,41 @@ public class GUI extends JFrame {
 			gaming = 1;
 			}else {
 				JOptionPane.showMessageDialog(null, "자신의 악마 3마리를 정해주세요");
+			}
+		}
+	}
+	
+	
+	
+	class SettingListener implements ActionListener {
+		public void actionPerformed(ActionEvent e) {
+			if(ip.getText().equals("")) {
+				JOptionPane.showMessageDialog(null, "서버 IP 를 입력하세요.");
+			}else {
+			frame4.setVisible(false);
+			ServerIP = ip.getText();
+			login();
+			}
+		}
+		}
+	
+	
+	
+	class ChoiceListener implements ActionListener {
+		public void actionPerformed(ActionEvent e) {
+			if (client.isSelected()) {
+				frame3.setVisible(false);
+				client();
+
+			} else if (server.isSelected()) {
+				frame3.setVisible(false);
+				login();
+				login log = new login();
+				log.go();
+				
+				
+
+
 			}
 		}
 	}
@@ -189,6 +235,50 @@ public class GUI extends JFrame {
 			outgoing.setText("");
 			outgoing.requestFocus();
 		}
+	}
+	public void client() {
+		frame4 = new JFrame();
+		frame4.setLayout(new BorderLayout());
+		frame4.setSize(400, 200);
+		frame4.setTitle("Angel and Devil Game");
+		frame4.setVisible(true);
+		iu4 = new JPanel();
+		iu4.setLayout(null);
+		iu4.setBackground(Color.GRAY);
+		ip = new JTextField();
+		ip.setBounds(50,50,200,50);
+		setting = new JButton("시작");
+		setting.setBounds(250, 50, 100, 50);
+		setting.addActionListener(new SettingListener());
+		iu4.add(setting);
+		iu4.add(ip);
+		frame4.add(iu4);
+
+	}
+	public void start() {
+	    sc.add(server);
+	    sc.add(client);
+		server.setBounds(20, 20, 150, 50);
+		client.setBounds(20, 80, 150, 50);
+		
+		iu3 = new JPanel();
+		iu3.setLayout(null);
+		iu3.setBackground(Color.GRAY);
+		
+		frame3 = new JFrame();
+		frame3.setLayout(new BorderLayout());
+		frame3.setSize(400, 200);
+		frame3.setTitle("Angel and Devil Game");
+		frame3.setVisible(true);
+
+		choice = new JButton("시작");
+		choice.setBounds(250, 50, 100, 50);
+		choice.addActionListener(new ChoiceListener());
+		
+		iu3.add(choice);
+		iu3.add(client);
+		iu3.add(server);
+		frame3.add(iu3);
 	}
 
 	public void login() {
@@ -367,7 +457,8 @@ public class GUI extends JFrame {
 	public static void main(String[] args) {
 
 		GUI gui = new GUI();
-		gui.login();
+		gui.start();
+
 
 	}
 }
