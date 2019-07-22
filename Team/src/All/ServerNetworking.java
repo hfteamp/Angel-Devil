@@ -32,7 +32,6 @@ public class ServerNetworking extends GUI {
 			String message;
 			try {
 				while ((message = reader.readLine()) != null) {
-					System.out.println("read " + message);
 					tellEveryone(message);
 				}
 			} catch (Exception ex) {

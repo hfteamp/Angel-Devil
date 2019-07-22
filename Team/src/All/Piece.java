@@ -240,8 +240,14 @@ public class Piece extends GUI {
 		++ii;
 		++devilkill;
 		if(devilkill==1) {
-			JOptionPane.showMessageDialog(null, "악마 3마리를 잡으셔서 게임에서 졌습니다");
-			END.game(turn);
+			if(who.equals("P1")) {
+				writer.println("플레이어2"+":"+" "+":"+" "+":"+" "+":"+" "+":"+" "+":"+" "+":"+" "); // 태현
+				writer.flush(); // 태현
+			}else {
+				writer.println("플레이어1"+":"+" "+":"+" "+":"+" "+":"+" "+":"+" "+":"+" "+":"+" "); // 태현
+				writer.flush(); // 태현
+			}
+			
 		}
 	}
 }

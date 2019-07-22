@@ -64,6 +64,8 @@ public class GUI extends JFrame {
 	static Socket sock;
 	static JLabel timer = new JLabel("timer");
 	static int timercount;
+	static Rule rule = new Rule();
+	static GUI gui = new GUI();
 
 	/*-----------------------------------------------------------------------------*/
 
@@ -78,7 +80,8 @@ public class GUI extends JFrame {
 			writer.flush();
 			JOptionPane.showMessageDialog(null, "상대방이 준비완료되면 바로 시작합니다.");
 			if(timercount == 2) {
-				Rule rule = new Rule();
+
+				rule.start();
 				rule.go();
 			}
 			start.setEnabled(false);
@@ -151,8 +154,7 @@ public class GUI extends JFrame {
 		}
 
 		public void mouseClicked(MouseEvent e) {
-			if (gaming == 1)
-				piece[pid].move(x, y); // 말이동
+			if (gaming == 1) piece[pid].move(x, y); // 말이동
 			click = 0;
 
 		}
@@ -329,7 +331,6 @@ public class GUI extends JFrame {
 						board2[x][y].setSize(90, 90);
 						board2[x][y].setLayout(new FlowLayout());
 						frame.add(board2[x][y]);
-						if (ii < 6) {
 							deathbutton[ii] = new JButton();
 							deathbutton[ii].setPreferredSize(new Dimension(80, 80));
 							deathbutton[ii].setBorderPainted(false);
@@ -337,7 +338,7 @@ public class GUI extends JFrame {
 							deathbutton[ii].setContentAreaFilled(false);
 							board2[x][y].add(deathbutton[ii]);
 							ii++;
-						}
+
 					}
 				}
 				board[x][y] = new JPanel();
@@ -464,7 +465,7 @@ public class GUI extends JFrame {
 
 	public static void main(String[] args) {
 
-		GUI gui = new GUI();
+
 		gui.start();
 
 

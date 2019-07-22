@@ -44,8 +44,7 @@ public class ClientNetworking1 extends GUI {
 	                	if(a.length == 6) {
 	                		timercount++;
 	                		
-	                	}
-	                	if(message.equals("Player1") || message.equals("Player2")) {  //태현
+	                	}else if(message.equals("Player1") || message.equals("Player2")) {  //태현
 	                	labelturn.setText(message);  //태현
 	                	
 	                	}else if(a.length==5) {
@@ -69,7 +68,8 @@ public class ClientNetworking1 extends GUI {
 	    					Rule.time = 16;
 	    				}
 	    				
-	                    }else if(a.length == 4){  //태현
+	                    }
+	                	else if(a.length == 4){  //태현
 	                    	piece[Integer.parseInt(a[0])].state = Integer.parseInt(a[1]);
 		                    }else if(a.length==3) {
 		                    	if(a[0].equals("change")) {
@@ -107,17 +107,17 @@ public class ClientNetworking1 extends GUI {
 	    						Rule.time = 16;
 	    					}	
 	                    	
-	                    }else if(a.length==1) {
+	                    } else if(a.length==7) {
 	                    	if(a[0].equals("계속")) {
 	                    		reset re = new reset();
-	                    		re.set();
-	                    	
+	                    		re.set();   	
 	                    	}
 	                    	else if(a[0].equals("게임끝")) {
 	                    		System.exit(0);
 	                    	}
-	                    }
-	                    else incoming.append(message + "\n");
+	                    }else if(a.length==8) {
+	                    	END.game(a[0]);
+	                    }else	incoming.append(message + "\n");
 	             
 	                }
 	            } catch (IOException ex)
