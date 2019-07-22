@@ -234,16 +234,16 @@ public class GUI extends JFrame {
 						} else if (x % 2 != 0 && y % 2 != 0) {
 							board2[x][y].setBackground(Color.red);
 						}
-						board2[x][y].setLocation((y + 8) * 90, (x + 8) * 90);
-						board2[x][y].setSize(90, 90);
+						board2[x][y].setLocation((y + 8) * 88, ((x + 6) * 90)+60);
+						board2[x][y].setSize(sql, sql);
 						board2[x][y].setLayout(new FlowLayout());
 						frame.add(board2[x][y]);
 						if (ii < 6) {
 							deathbutton[ii] = new JButton();
-							deathbutton[ii].setPreferredSize(new Dimension(80, 80));
-							deathbutton[ii].setBorderPainted(false);
-							deathbutton[ii].setFocusPainted(false);
-							deathbutton[ii].setContentAreaFilled(false);
+							deathbutton[ii].setPreferredSize(new Dimension(50, 50));
+							deathbutton[ii].setBorderPainted(true);
+							deathbutton[ii].setFocusPainted(true);
+							deathbutton[ii].setContentAreaFilled(true);
 							board2[x][y].add(deathbutton[ii]);
 							ii++;
 						}
@@ -358,7 +358,7 @@ public class GUI extends JFrame {
 		start.setBounds(800, 500, 100, 40);
 		frame.add(start);
 		frame.add(iu);
-		frame.setSize(1200, 1200);
+		frame.setSize(1100, 1100);
 		frame.setTitle("Angel and Devil Game");
 		frame.setVisible(true);
 

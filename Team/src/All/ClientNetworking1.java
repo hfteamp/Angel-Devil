@@ -107,7 +107,19 @@ public class ClientNetworking1 extends GUI {
 	    						Rule.time = 16;
 	    					}	
 	                    	
-	                    }else incoming.append(message + "\n");
+	                    }else if(a.length==1) {
+	                    	if(a[0].equals("계속")) {
+	                    		System.exit(0);
+	                    		
+	                    		GUI gui2 = new GUI();
+	                    		gui2.login();
+	                    	
+	                    	}
+	                    	else if(a[0].equals("게임끝")) {
+	                    		System.exit(0);
+	                    	}
+	                    }
+	                    else incoming.append(message + "\n");
 	             
 	                }
 	            } catch (IOException ex)
