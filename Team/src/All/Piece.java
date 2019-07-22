@@ -220,7 +220,7 @@ public class Piece extends GUI {
 		++angelkill;
 		if(angelkill==4) {
 			JOptionPane.showMessageDialog(null, "천사 4마리를 잡으셔서 게임에서 졌습니다");
-			END.game(turn);
+			//END.game(turn);
 		}
 	}
 	else if(state==1) {
@@ -230,7 +230,7 @@ public class Piece extends GUI {
 		++devilkill;
 		if(devilkill==1) {
 			JOptionPane.showMessageDialog(null, "악마 3마리를 잡으셔서 게임에서 졌습니다");
-			END.game(turn);
+			//END.game(turn);
 		}
 	}
 }
