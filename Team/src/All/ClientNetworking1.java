@@ -109,10 +109,8 @@ public class ClientNetworking1 extends GUI {
 	                    	
 	                    }else if(a.length==1) {
 	                    	if(a[0].equals("계속")) {
-	                    		System.exit(0);
-	                    		
-	                    		GUI gui2 = new GUI();
-	                    		gui2.login();
+	                    		reset re = new reset();
+	                    		re.set();
 	                    	
 	                    	}
 	                    	else if(a[0].equals("게임끝")) {

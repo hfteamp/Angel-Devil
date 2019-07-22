@@ -57,6 +57,7 @@ public class GUI extends JFrame {
 	static JTextField outgoing;
 	static JLabel labelturn = new JLabel("player2"); // 태현
 	static JLabel nowturn = new JLabel("현재 턴"); // 태현
+	static JLabel nowtime = new JLabel("남은 시간"); // 태현
 	static JLabel Iam = new JLabel(); // 태현
 	static BufferedReader reader;
 	static PrintWriter writer;
@@ -316,24 +317,24 @@ public class GUI extends JFrame {
 					if (y < 3) {
 						board2[x][y] = new JPanel();
 						if(x%2 == 0 && y%2 == 0 ) {
-							board2[x][y].setBackground(Color.red);
+							board2[x][y].setBackground(Color.black);
 						} else if(x % 2 != 0 && y % 2 == 0) {
-							board2[x][y].setBackground(Color.yellow);
+							board2[x][y].setBackground(Color.DARK_GRAY);
 						}else if (x % 2 == 0 && y % 2 != 0) {
-							board2[x][y].setBackground(Color.yellow);
+							board2[x][y].setBackground(Color.DARK_GRAY);
 						} else if (x % 2 != 0 && y % 2 != 0) {
-							board2[x][y].setBackground(Color.red);
+							board2[x][y].setBackground(Color.black);
 						}
-						board2[x][y].setLocation((y + 8) * 88, ((x + 6) * 90)+60);
-						board2[x][y].setSize(sql, sql);
+						board2[x][y].setLocation((y + 8) * 90, ((x + 6) * 90));
+						board2[x][y].setSize(90, 90);
 						board2[x][y].setLayout(new FlowLayout());
 						frame.add(board2[x][y]);
 						if (ii < 6) {
 							deathbutton[ii] = new JButton();
-							deathbutton[ii].setPreferredSize(new Dimension(50, 50));
-							deathbutton[ii].setBorderPainted(true);
-							deathbutton[ii].setFocusPainted(true);
-							deathbutton[ii].setContentAreaFilled(true);
+							deathbutton[ii].setPreferredSize(new Dimension(80, 80));
+							deathbutton[ii].setBorderPainted(false);
+							deathbutton[ii].setFocusPainted(false);
+							deathbutton[ii].setContentAreaFilled(false);
 							board2[x][y].add(deathbutton[ii]);
 							ii++;
 						}
@@ -373,7 +374,8 @@ public class GUI extends JFrame {
 		}
 		start.addActionListener(new StartListener());
 
-		addgui();
+	 addgui();
+	
 	}
 
 	public void addpiece() {
@@ -410,13 +412,16 @@ public class GUI extends JFrame {
 		sendButton.setBounds(950, 260, 100, 40); // 태현
 		labelturn.setBounds(720, 360, 140, 60); // 태현
 		nowturn.setBounds(720, 310, 140, 60); // 태현
-		timer.setBounds(900, 350, 140, 60);
+		nowtime.setBounds(860, 310, 140, 60);
+		timer.setBounds(860, 360, 140, 60);
 		timer.setOpaque(true); // 태현
 		timer.setBackground(Color.DARK_GRAY);
 		Iam.setOpaque(true); // 태현
 		Iam.setBackground(Color.DARK_GRAY); // 태현
 		nowturn.setOpaque(true); // 태현
 		nowturn.setBackground(Color.DARK_GRAY); // 태현
+		nowtime.setOpaque(true); // 태현
+		nowtime.setBackground(Color.DARK_GRAY);
 		labelturn.setOpaque(true); // 태현
 		labelturn.setBackground(Color.DARK_GRAY); // 태현
 		timer.setFont(new Font("Seif", Font.BOLD, 24)); // 태현
@@ -425,27 +430,30 @@ public class GUI extends JFrame {
 		labelturn.setForeground(Color.GREEN); // 태현
 		nowturn.setFont(new Font("Seif", Font.BOLD, 24)); // 태현
 		nowturn.setForeground(Color.GREEN); // 태현
+		nowtime.setFont(new Font("Seif", Font.BOLD, 24)); // 태현
+		nowtime.setForeground(Color.GREEN); // 태현
 		Iam.setFont(new Font("Seif", Font.BOLD, 30)); // 태현
 		Iam.setForeground(Color.RED); // 태현
 		labelturn.setHorizontalAlignment(JLabel.CENTER); // 태현
 		nowturn.setHorizontalAlignment(JLabel.CENTER); // 태현
+		nowtime.setHorizontalAlignment(JLabel.CENTER); // 태현
 		Iam.setHorizontalAlignment(JLabel.CENTER); // 태현
 		timer.setHorizontalAlignment(JLabel.CENTER); // 태현
 		frame.add(timer);
 		frame.add(Iam); // 태현
 		frame.add(nowturn); // 태현
+		frame.add(nowtime); // 태현
 		frame.add(labelturn); // 태현
 		frame.add(qScroller);
 		frame.add(outgoing);
 		frame.add(sendButton);
 		/*--------------------------------------------------------------------------------------*/
-		timer.setBounds(850, 350, 140, 60);
 
 		iu = new JPanel();
 		iu.setLayout(null);
 		iu.setBackground(Color.GRAY);
 
-		start.setBounds(800, 500, 100, 40);
+		start.setBounds(780, 460, 150, 50);
 		frame.add(start);
 		frame.add(iu);
 		frame.setSize(1100, 1100);
