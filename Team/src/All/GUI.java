@@ -33,14 +33,14 @@ public class GUI extends JFrame {
 	static String turn = "P2";
 	static Piece piece[] = new Piece[14];
 	static Piece p;
-	static ChangeImage c = new ChangeImage();
 	ImageIcon P1icon = new ImageIcon("image/P1.png");
 	ImageIcon P2icon = new ImageIcon("image/P2.png");
 	int gaming;
 	int killed;
 	static String who;
 	int state;
-	static int deathkill = 0;
+	static int devilkill = 0;
+	static int angelkill = 0;
 	/*-----------------------------------------------------------------------------*/
 	static JTextArea incoming;
 	static JTextField outgoing;
@@ -225,7 +225,15 @@ public class GUI extends JFrame {
 				if (x < 2) {
 					if (y < 3) {
 						board2[x][y] = new JPanel();
-						board2[x][y].setBackground(Color.black);
+						if(x%2 == 0 && y%2 == 0 ) {
+							board2[x][y].setBackground(Color.red);
+						} else if(x % 2 != 0 && y % 2 == 0) {
+							board2[x][y].setBackground(Color.yellow);
+						}else if (x % 2 == 0 && y % 2 != 0) {
+							board2[x][y].setBackground(Color.yellow);
+						} else if (x % 2 != 0 && y % 2 != 0) {
+							board2[x][y].setBackground(Color.red);
+						}
 						board2[x][y].setLocation((y + 8) * 90, (x + 8) * 90);
 						board2[x][y].setSize(90, 90);
 						board2[x][y].setLayout(new FlowLayout());
@@ -348,10 +356,6 @@ public class GUI extends JFrame {
 		iu.setBackground(Color.GRAY);
 
 		start.setBounds(800, 500, 100, 40);
-		p1.setBounds(900, 600, 100, 40);
-		p2.setBounds(900, 650, 100, 40);
-		frame.add(p1);
-		frame.add(p2);
 		frame.add(start);
 		frame.add(iu);
 		frame.setSize(1200, 1200);

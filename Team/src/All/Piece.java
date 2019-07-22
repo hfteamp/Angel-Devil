@@ -216,15 +216,19 @@ public class Piece extends GUI {
 		else {
 			deathbutton[ii].setIcon(new ImageIcon("image/" + "P2" + ".png"));
 		}
-		System.out.println(ii);
 		++ii;
+		++angelkill;
+		if(angelkill==4) {
+			JOptionPane.showMessageDialog(null, "천사 4마리를 잡으셔서 게임에서 졌습니다");
+			
+		}
 	}
 	else if(state==1) {
 		deathbutton[ii].setIcon(new ImageIcon("image/" + who +"_Devil" + ".png"));
 		System.out.println(ii);
 		++ii;
-		++deathkill;
-		if(deathkill==3) {
+		++devilkill;
+		if(devilkill==3) {
 			JOptionPane.showMessageDialog(null, "악마 3마리를 잡으셔서 게임에서 졌습니다");
 			
 		}
