@@ -189,6 +189,7 @@ public class GUI extends JFrame {
 			this.team = team;
 			this.state = state;
 		}
+	
 
 		public void actionPerformed(ActionEvent e) {
 
@@ -196,8 +197,8 @@ public class GUI extends JFrame {
 				piece[id].kill(); // 말잡기
 			if (gaming == 1)
 				piece[id].postpiece(); // 말상태저장
-
-			
+		if(gaming==1)
+				piece[id].win(state,x,y);			
 			if (gaming == 0) {
 				if(piece[id].team==who) {
 				if(Piece.count!=0) {
