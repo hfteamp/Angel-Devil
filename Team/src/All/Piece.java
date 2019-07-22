@@ -85,12 +85,23 @@ public class Piece extends GUI {
 
 			} else {
 				JOptionPane.showMessageDialog(null, "이동범위 밖입니다!");
-
-				/*
-				 * if (state == 1) { piecebutton[pid].setIcon(new ImageIcon("image/" + turn +
-				 * "_Devil" + ".png")); }
-				 */
-				piecebutton[pid].setIcon(new ImageIcon("image/" + turn + ".png"));
+				if(who == "P1") {
+					for(cc=0;cc<7;cc++) {
+						if(piece[cc].state == 1) {
+							piecebutton[cc].setIcon(new ImageIcon("image/" + who + "_Devil" + ".png"));
+						}else if(piece[cc].state == 0) {
+							piecebutton[cc].setIcon(new ImageIcon("image/" + who + ".png"));
+						}
+					}
+				}else if(who == "P2"){
+					for(cc=7;cc<14;cc++) {
+						if(piece[cc].state == 1) {
+							piecebutton[cc].setIcon(new ImageIcon("image/" + who + "_Devil" + ".png"));
+						}else if(piece[cc].state == 0) {
+							piecebutton[cc].setIcon(new ImageIcon("image/" + who + ".png"));
+						}							
+				}
+				}
 				click = 0;
 			}
 
