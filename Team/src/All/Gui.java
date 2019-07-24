@@ -41,7 +41,7 @@ public class Gui extends JFrame {
 	static String pteam; // 과거 팀
 	static String turn = "P2";
 	static Piece piece[] = new Piece[14]; // 말 상태
-	String ServerIP = "127.0.0.1";
+	static String ServerIP = "127.0.0.1";
 	ImageIcon P1icon = new ImageIcon("image/P1.png");
 	ImageIcon P2icon = new ImageIcon("image/P2.png");
 	int gaming; // 게임 상태확인
