@@ -33,10 +33,10 @@ public class Gui extends JFrame {
 	JButton connect = new JButton("접속"); // 클라에서 접속할 때
 	static JButton deathbutton[] = new JButton[6];
 	int sql = 100; // 사각형 크기
-	static int check;
+	static int check; // 승리조건
 	static int count = 3;
 	static int click = 0;
-	static int pid,pstate; // 과거의 말 고유번호
+	static int pid, pstate; // 과거의 말 고유번호
 	static int px, py; // 과거 좌표
 	static String pteam; // 과거 팀
 	static String turn = "P2";
@@ -141,7 +141,7 @@ public class Gui extends JFrame {
 
 		public void mouseClicked(MouseEvent e) {
 			if (gaming == 1) {
-				piece[pid].win(pstate,x,y);
+				piece[pid].win(pstate, x, y);
 				piece[pid].move(x, y); // 말이동
 			}
 			click = 0;
@@ -177,7 +177,6 @@ public class Gui extends JFrame {
 		}
 
 		public void actionPerformed(ActionEvent e) {
-
 			if (gaming == 1) {
 				piece[id].win(pstate);
 				piece[id].kill(); // 말잡기
@@ -232,9 +231,9 @@ public class Gui extends JFrame {
 		clientpanel.setLayout(null);
 		clientpanel.setBackground(Color.GRAY);
 		ip = new JTextField();
-		ip.addKeyListener(new KeyAdapter(){
+		ip.addKeyListener(new KeyAdapter() {
 			public void keyPressed(KeyEvent e) {
-				if(e.getKeyCode()== KeyEvent.VK_ENTER) {
+				if (e.getKeyCode() == KeyEvent.VK_ENTER) {
 					clientframe.setVisible(false);
 					ServerIP = ip.getText();
 					login();
@@ -390,9 +389,9 @@ public class Gui extends JFrame {
 		qScroller.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
 		qScroller.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
 		outgoing = new JTextField();
-		outgoing.addKeyListener(new KeyAdapter(){
+		outgoing.addKeyListener(new KeyAdapter() {
 			public void keyPressed(KeyEvent e) {
-				if(e.getKeyCode()== KeyEvent.VK_ENTER) {
+				if (e.getKeyCode() == KeyEvent.VK_ENTER) {
 					writer.println(who + " | " + outgoing.getText());
 					writer.flush();
 					outgoing.setText("");
