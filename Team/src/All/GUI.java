@@ -164,6 +164,7 @@ public class GUI extends JFrame {
 
 		@Override
 		public void mouseReleased(MouseEvent e) {
+			
 		}
 
 		@Override //
@@ -196,9 +197,11 @@ public class GUI extends JFrame {
 			if (gaming == 1)
 				piece[id].kill(); // 말잡기
 			if (gaming == 1)
-				piece[id].postpiece(); // 말상태저장
-		if(gaming==1)
-				piece[id].win(state,x,y);			
+				piece[id].postpiece();
+				piece[id].save();// 말상태저장
+			if(gaming==1)
+				piece[id].win(state);	
+			
 			if (gaming == 0) {
 				if(piece[id].team==who) {
 				if(Piece.count!=0) {

@@ -19,7 +19,11 @@ public class Piece extends GUI {
 		this.state = state;
 		this.team = team;
 	}
-
+void save() {
+	px = this.x;
+	py = this.y;
+	String pturn = this.turn;
+}
 	void postpiece() {
 		if (click == 0) {
 			if (who == turn && who == team) {
@@ -196,62 +200,69 @@ public class Piece extends GUI {
 				}
 
 			}
-
-			/*
-			 * if (state == 1) { piecebutton[pid].setIcon(new ImageIcon("image/" + turn +
-			 * "_Devil" + ".png")); } piecebutton[pid].setIcon(new ImageIcon("image/" + turn
-			 * + ".png"));
-			 */
 		}
 
 	}
-	public void win(int state, int x, int y) {
+	public void win(int state) {
+		
 		switch (state) {
 		case 1:
+			for(cc=0;cc<7;cc++) {
 			if (who == "P1") {
-				if (x == 6 && y == 0) {
+				if (piece[cc].x == 6 && piece[cc].y == 0) {
+					click=0;
 					JOptionPane.showMessageDialog(null, "1악마는 이동할 수 없습니다.");
-					
-				} else if (x == 6 && y == 6) {
+					re();
+				} else if (piece[cc].x == 6 && piece[cc].y == 6) {
 					JOptionPane.showMessageDialog(null, "2악마는 이동할 수 없습니다.");
-				
-				} else if (who == "P2") {
-					if (x == 0 && y == 0) {
-						JOptionPane.showMessageDialog(null, "3악마는 이동할 수 없습니다.");
-					
-					} else if (x == 0 && y == 6) {
-						JOptionPane.showMessageDialog(null, "4악마는 이동할 수 없습니다.");
-						
-					}
+					re();
+				}
 				}
 			}
+				for(cc=7;cc<14;cc++) {
+				if (who == "P2") {
+					if (piece[cc].x == 0 && piece[cc].y == 0) {
+						JOptionPane.showMessageDialog(null, "3악마는 이동할 수 없습니다.");
+						re();
+					} else if (piece[cc].x == 0 && piece[cc].y == 6) {
+						JOptionPane.showMessageDialog(null, "4악마는 이동할 수 없습니다.");
+						re();
+					}
+				}
+				}
+			
 
 		case 0:
+			for(cc=0;cc<7;cc++) {
 			if (who == "P1") {
-				if (x == 6 && y == 0) {
+				if (piece[cc].x == 6 &&piece[cc].y == 0) {
 					JOptionPane.showMessageDialog(null, "5P1이 이겼습니다.");
-					END.game(turn);
-				} else if (x == 6 && y == 6) {
+					END.game(who);
+				} else if (piece[cc].x == 6 && piece[cc].y == 6) {
 					JOptionPane.showMessageDialog(null, "6P1이 이겼습니다.");
-					END.game(turn);
+					END.game(who);
 				}
-			} else if (who == "P2") {
-				if (x == 0 && y == 0) {
+			}
+			}
+			for(cc=7;cc<14;cc++) {
+			if (who == "P2") {
+				if (piece[cc].x ==0 && piece[cc].y == 0) {
 					JOptionPane.showMessageDialog(null, "7P2가 이겼습니다.");
-					END.game(turn);
-				} else if (x == 0 && y == 6) {
+					END.game(who);
+				} else if (piece[cc].x == 0 && piece[cc].y == 6) {
 					JOptionPane.showMessageDialog(null, "8P2가 이겼습니다.");
-					END.game(turn);
+					END.game(who);
 				}
+			}
 			}
 				
 		}
 	}
-void re() {
-pid = this.id;
-px = this.x;
-py = this.y;
-}
+	void re() {
+
+			piecebutton[id].setIcon(new ImageIcon("image/" + who + "_Devil" + ".png"));
+		
+	}
 
 	void trans(int id) {
 		if(piece[id].state == 0) {
