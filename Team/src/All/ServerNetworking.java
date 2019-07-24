@@ -8,7 +8,7 @@ import java.net.Socket;
 import java.util.ArrayList;
 import java.util.Iterator;
 
-public class ServerNetworking extends GUI {
+public class ServerNetworking extends Gui {
 	ArrayList clientOutputStreams;
 	static int who = 0;
 
@@ -21,8 +21,6 @@ public class ServerNetworking extends GUI {
 				sock = clientSOcket;
 				InputStreamReader isReader = new InputStreamReader(sock.getInputStream());
 				reader = new BufferedReader(isReader);
-			
-
 			} catch (Exception ex) {
 				ex.printStackTrace();
 			}
@@ -41,11 +39,8 @@ public class ServerNetworking extends GUI {
 	}
 
 	public void go() {
-
 		clientOutputStreams = new ArrayList();
-
 		try {
-			
 			ServerSocket serverSock = new ServerSocket(5000);
 			while (true) {
 				Socket clientSocket = serverSock.accept();
@@ -54,7 +49,6 @@ public class ServerNetworking extends GUI {
 
 				Thread t = new Thread(new ClientHandler(clientSocket));
 				t.start();
-				
 			}
 		} catch (Exception ex) {
 			ex.printStackTrace();
