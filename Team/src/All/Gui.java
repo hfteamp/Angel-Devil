@@ -13,6 +13,7 @@ public class Gui extends JFrame {
 	JFrame playerframe; // 플레이정하기프레임
 	JFrame serverframe; // 서버클라이언트정하는프레임
 	JFrame clientframe; // 클라이언트프레임
+	JFrame ruleframe; // 규칙프레임
 	static JPanel gameboard[][] = new JPanel[7][7]; // 게임판
 	static JPanel deathboard[][] = new JPanel[2][3]; // 죽었을때 들어가는 패널
 	static JButton piecebutton[] = new JButton[14]; // 게임 말
@@ -20,9 +21,10 @@ public class Gui extends JFrame {
 	JPanel playerpanel; // 플레이패널
 	JPanel serverpanel; // 서버패널
 	JPanel clientpanel; // 클라이언트패널
+	JPanel rulepanel; // 클라이언트패널
 	JTextField ip; // 클라이언트패널
 	JButton playerchoice; // 플레이어 패널
-	JRadioButton p1 = new JRadioButton("플레이어1"); //
+	JRadioButton p1 = new JRadioButton("플레이어1"); 
 	JRadioButton p2 = new JRadioButton("플레이어2(선공)");
 	JRadioButton server = new JRadioButton("서버");
 	JRadioButton client = new JRadioButton("클라이언트");
@@ -31,6 +33,7 @@ public class Gui extends JFrame {
 	JButton ready = new JButton("준비(Ready)"); // 게임시작전 준비
 	JButton choice = new JButton("선택"); // 서버와 클라 선택
 	JButton connect = new JButton("접속"); // 클라에서 접속할 때
+	JButton ruleclose = new JButton("확인"); // 룰 닫기
 	static JButton deathbutton[] = new JButton[6];
 	int sql = 100; // 사각형 크기
 	static int check; // 승리조건
@@ -56,6 +59,12 @@ public class Gui extends JFrame {
 	static JLabel labelturn = new JLabel("player2");
 	static JLabel nowturn = new JLabel("현재 턴");
 	static JLabel nowtime = new JLabel("남은 시간");
+	JLabel gamerule = new JLabel("게임 규칙");
+	JLabel gamerule2;
+	JLabel gameimage = new JLabel("플레이어1",P1icon,SwingUtilities.LEFT);
+	JLabel gameimage2 = new JLabel("플레이어2",P2icon,SwingUtilities.LEFT);;
+	JLabel gamerule3 = new JLabel("승리 조건");
+	JLabel gamerule4;
 	static JLabel Iam = new JLabel();
 	static BufferedReader reader;
 	static PrintWriter writer;
@@ -66,6 +75,12 @@ public class Gui extends JFrame {
 	static Gui gui = new Gui();
 
 	/*-----------------------------------------------------------------------------*/
+	
+	class ruleEXListener implements ActionListener {
+		public void actionPerformed(ActionEvent e) {
+			ruleframe.setVisible(false);
+		}
+	}
 	class readyListener implements ActionListener { // 시작 전 후 를 나누는 버튼에 리스너
 		public void actionPerformed(ActionEvent e) {
 			if (count == 0) {
@@ -300,6 +315,48 @@ public class Gui extends JFrame {
 		playerpanel.add(p2);
 		playerframe.add(playerpanel);
 	}
+	
+	public void ruleEX() {
+		ruleframe = new JFrame();
+		ruleframe.setLayout(new BorderLayout());
+		ruleframe.setSize(600, 650);
+		ruleframe.setTitle("Angel and Devil Game");
+		ruleframe.setVisible(true);
+		
+		gameimage.setBounds(0, 220, 300, 100);
+		gameimage.setFont(new Font("Seif", Font.BOLD, 20));
+		gameimage2.setBounds(250, 220, 300, 100);
+		gameimage2.setFont(new Font("Seif", Font.BOLD, 20));
+		gamerule.setBounds(220, 5, 150, 50);
+		gamerule.setFont(new Font("Seif", Font.BOLD, 25));
+		gamerule3.setBounds(220, 330, 150, 50);
+		gamerule3.setFont(new Font("Seif", Font.BOLD, 25));
+		gamerule2 = new JLabel();
+		gamerule2.setText("<html><body> 1 ) 게임 준비 전 자신의 말을 클릭하여 3개의 악마를 설정해주세요!<br><br> 2 ) 게임이 시작하면 차례로 돌아가면서 게임이 진행됩니다.<br><br>3 ) 시간제한이 15초이니 염두하고 게임을 진행해주세요!<br><br>4 ) 말은 전후좌우 1칸씩 이동가능합니다.<br> <p style=color:yellow;>(대각선 이동은 불가능합니다.)</p></body></html>");
+		gamerule4 = new JLabel();
+		gamerule4.setText("<html><body> 1 ) 상대의 천사(4개)를 모두 잡으면 승리합니다.<br><br> 2 ) 상대의 악마(3개)를 모두 잡으면 패배합니다! <br><br>3 ) 상대 진영에 표시된 자신의 팀 색깔과 일치하는 땅에 천사가 도달하면 승리합니다.<br>  <p style=color:yellow;>(이 공간은 악마가 이동할수없습니다.)</p></body></html>");
+		gamerule2.setBounds(0, 15, 700, 250);
+		gamerule2.setFont(new Font("Seif", Font.CENTER_BASELINE, 15));
+		gamerule4.setBounds(0, 325, 700, 250);
+		gamerule4.setFont(new Font("Seif", Font.CENTER_BASELINE, 15));
+		
+		ruleclose = new JButton("확인");
+		ruleclose.setBounds(250, 550, 60, 30);
+		
+		rulepanel = new JPanel();
+		rulepanel.setLayout(null);
+		rulepanel.setBackground(Color.GRAY);
+		
+		ruleclose.addActionListener(new ruleEXListener());
+		rulepanel.add(gamerule);
+		rulepanel.add(gamerule2);
+		rulepanel.add(gamerule3);
+		rulepanel.add(gamerule4);
+		rulepanel.add(ruleclose);
+		ruleframe.add(gameimage);
+		ruleframe.add(gameimage2);
+		ruleframe.add(rulepanel);
+	}
 
 	public void addboard() {
 		int aa = 0;
@@ -462,6 +519,8 @@ public class Gui extends JFrame {
 		gameframe.setSize(1100, 900);
 		gameframe.setTitle("Angel and Devil Game");
 		gameframe.setVisible(true);
+		
+		ruleEX();
 	}
 
 	public static void main(String[] args) {

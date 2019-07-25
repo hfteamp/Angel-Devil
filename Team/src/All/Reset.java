@@ -24,6 +24,7 @@ public class Reset extends Gui {
 		gui.timercount = 0;
 		gui.angelkill = 0;
 		gui.devilkill = 0;
+		gui.check=0;
 		Piece.ii = 0;
 		for (int x = 0; x < 7; x++) {
 			for (int y = 0; y < 7; y++) {

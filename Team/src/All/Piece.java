@@ -290,11 +290,11 @@ public class Piece extends Gui {
 					if (piece[id].x == 6 && piece[id].y == 0) {
 						check++;
 						piece[id].kill();
-						if (who.equals("P1")) {
+						if (who.equals("P1") && devilkill!=3) {
 							writer.println("플레이어1" + ":" + " " + ":" + " " + ":" + " " + ":" + " " + ":" + " " + ":"
 									+ " " + ":" + " ");
 							writer.flush();
-						} else {
+						} else if(devilkill!=3) {
 							writer.println("플레이어2" + ":" + " " + ":" + " " + ":" + " " + ":" + " " + ":" + " " + ":"
 									+ " " + ":" + " ");
 							writer.flush();
@@ -302,11 +302,11 @@ public class Piece extends Gui {
 					} else if (piece[id].x == 6 && piece[id].y == 6) {
 						check++;
 						piece[id].kill();
-						if (who.equals("P1")) {
+						if (who.equals("P1") && devilkill!=3) {
 							writer.println("플레이어1" + ":" + " " + ":" + " " + ":" + " " + ":" + " " + ":" + " " + ":"
 									+ " " + ":" + " ");
 							writer.flush();
-						} else {
+						} else if(devilkill!=3) {
 							writer.println("플레이어2" + ":" + " " + ":" + " " + ":" + " " + ":" + " " + ":" + " " + ":"
 									+ " " + ":" + " ");
 							writer.flush();
@@ -317,11 +317,11 @@ public class Piece extends Gui {
 					if (piece[id].x == 0 && piece[id].y == 0) {
 						check++;
 						piece[id].kill();
-						if (who.equals("P1")) {
+						if (who.equals("P1") && devilkill!=3) {
 							writer.println("플레이어1" + ":" + " " + ":" + " " + ":" + " " + ":" + " " + ":" + " " + ":"
 									+ " " + ":" + " ");
 							writer.flush();
-						} else {
+						} else if(devilkill!=3) {
 							writer.println("플레이어2" + ":" + " " + ":" + " " + ":" + " " + ":" + " " + ":" + " " + ":"
 									+ " " + ":" + " ");
 							writer.flush();
@@ -329,11 +329,11 @@ public class Piece extends Gui {
 					} else if (piece[id].x == 0 && piece[id].y == 6) {
 						check++;
 						piece[id].kill();
-						if (who.equals("P1")) {
+						if (who.equals("P1") && devilkill!=3) {
 							writer.println("플레이어1" + ":" + " " + ":" + " " + ":" + " " + ":" + " " + ":" + " " + ":"
 									+ " " + ":" + " ");
 							writer.flush();
-						} else {
+						} else if(devilkill!=3) {
 							writer.println("플레이어2" + ":" + " " + ":" + " " + ":" + " " + ":" + " " + ":" + " " + ":"
 									+ " " + ":" + " ");
 							writer.flush();
