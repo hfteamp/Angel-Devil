@@ -79,6 +79,7 @@ public class Gui extends JFrame {
 	class ruleEXListener implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
 			ruleframe.setVisible(false);
+			
 		}
 	}
 	class readyListener implements ActionListener { // 시작 전 후 를 나누는 버튼에 리스너
@@ -238,6 +239,12 @@ public class Gui extends JFrame {
 
 	public void client() {
 		clientframe = new JFrame();
+		clientframe.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		clientframe.addWindowListener(new WindowAdapter(){
+			public void windowClosing(WindowEvent e) {
+			System.exit(0);
+			}
+		});
 		clientframe.setLayout(new BorderLayout());
 		clientframe.setSize(400, 200);
 		clientframe.setTitle("Angel and Devil Game");
@@ -274,6 +281,12 @@ public class Gui extends JFrame {
 		serverpanel.setBackground(Color.GRAY);
 
 		serverframe = new JFrame();
+		serverframe.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		serverframe.addWindowListener(new WindowAdapter(){
+			public void windowClosing(WindowEvent e) {
+			System.exit(0);
+			}
+		});
 		serverframe.setLayout(new BorderLayout());
 		serverframe.setSize(400, 200);
 		serverframe.setTitle("Angel and Devil Game");
@@ -303,6 +316,12 @@ public class Gui extends JFrame {
 		playerpanel.setBackground(Color.GRAY);
 
 		playerframe = new JFrame();
+		playerframe.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		playerframe.addWindowListener(new WindowAdapter(){
+			public void windowClosing(WindowEvent e) {
+			System.exit(0);
+			}
+		});
 		playerframe.setLayout(new BorderLayout());
 		playerframe.setSize(400, 200);
 		playerframe.setTitle("Angel and Devil Game");
