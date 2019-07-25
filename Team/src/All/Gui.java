@@ -332,6 +332,7 @@ public class Gui extends JFrame {
 					}
 				}
 				gameboard[x][y] = new JPanel();
+				
 				if (x % 2 == 0 && y % 2 == 0) {
 					gameboard[x][y].setBackground(Color.black);
 				} else if (x % 2 != 0 && y % 2 == 0) {
@@ -341,6 +342,16 @@ public class Gui extends JFrame {
 				} else if (x % 2 != 0 && y % 2 != 0) {
 					gameboard[x][y].setBackground(Color.black);
 				}
+				if (x==0&& y== 0) {
+					gameboard[x][y].setBackground(Color.pink);
+				}else if(x==0&&y==6) {
+					gameboard[x][y].setBackground(Color.pink);
+				}else if(x==6&&y==6) {
+					gameboard[x][y].setBackground(Color.yellow);
+				}else if (x==6&&y==0) {
+					gameboard[x][y].setBackground(Color.yellow);
+				}
+					
 				if (x == 0) {
 					piecebutton[aa].setIcon(P1icon);
 					gameboard[x][y].add(piecebutton[aa]);
