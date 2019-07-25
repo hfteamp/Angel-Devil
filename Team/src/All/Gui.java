@@ -436,6 +436,12 @@ public class Gui extends JFrame {
 
 	public void addpiece() {
 		gameframe = new JFrame();
+		gameframe.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		gameframe.addWindowListener(new WindowAdapter(){
+			public void windowClosing(WindowEvent e) {
+			System.exit(0);
+			}
+		});
 		gameframe.setLayout(new BorderLayout());
 		for (int i = 0; i < 14; i++) {
 			piecebutton[i] = new JButton();
