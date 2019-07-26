@@ -116,8 +116,8 @@ public class Piece extends Gui {
 	void kill() {
 
 		if (click == 1) {
-			if (team == who) {
-				JOptionPane.showMessageDialog(null, "자신의 말은 잡을수 없습니다.");
+			if(team==who||piece[id].x==piece[id].px ) {
+			
 				if (who == "P1") {
 					for (cc = 0; cc < 7; cc++) {
 						if (piece[cc].state == 1) {
@@ -135,7 +135,9 @@ public class Piece extends Gui {
 						}
 					}
 				}
-			} else if (((px - 1 == x || x == px + 1) && (py == y) || ((py - 1 == y || y == py + 1) && (px == x)))) {
+				click=0;
+			}
+		else if (((px - 1 == x || x == px + 1) && (py == y) || ((py - 1 == y || y == py + 1) && (px == x)))) {
 				try {
 					writer.println(pid + ":" + id);
 					writer.flush();

@@ -338,7 +338,7 @@ public class Gui extends JFrame {
 	public void ruleEX() {
 		ruleframe = new JFrame();
 		ruleframe.setLayout(new BorderLayout());
-		ruleframe.setSize(650, 650);
+		ruleframe.setSize(620, 650);
 		ruleframe.setTitle("Angel and Devil Game");
 		ruleframe.setVisible(true);
 		
