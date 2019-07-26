@@ -309,7 +309,7 @@ public class Gui extends JFrame {
 		p2.setBounds(20, 80, 150, 50);
 
 		playerchoice = new JButton("플레이어선택");
-		playerchoice.setBounds(250, 50, 100, 50);
+		playerchoice.setBounds(225, 50, 125, 50);
 
 		playerpanel = new JPanel();
 		playerpanel.setLayout(null);
@@ -338,7 +338,7 @@ public class Gui extends JFrame {
 	public void ruleEX() {
 		ruleframe = new JFrame();
 		ruleframe.setLayout(new BorderLayout());
-		ruleframe.setSize(600, 650);
+		ruleframe.setSize(650, 650);
 		ruleframe.setTitle("Angel and Devil Game");
 		ruleframe.setVisible(true);
 		
@@ -346,6 +346,8 @@ public class Gui extends JFrame {
 		gameimage.setFont(new Font("Seif", Font.BOLD, 20));
 		gameimage2.setBounds(250, 220, 300, 100);
 		gameimage2.setFont(new Font("Seif", Font.BOLD, 20));
+		gameimage.setVisible(true);
+		gameimage.setVisible(true);
 		gamerule.setBounds(220, 5, 150, 50);
 		gamerule.setFont(new Font("Seif", Font.BOLD, 25));
 		gamerule3.setBounds(220, 330, 150, 50);
@@ -354,9 +356,9 @@ public class Gui extends JFrame {
 		gamerule2.setText("<html><body> 1 ) 게임 준비 전 자신의 말을 클릭하여 3개의 악마를 설정해주세요!<br><br> 2 ) 게임이 시작하면 차례로 돌아가면서 게임이 진행됩니다.<br><br>3 ) 시간제한이 15초이니 염두하고 게임을 진행해주세요!<br><br>4 ) 말은 전후좌우 1칸씩 이동가능합니다.<br> <p style=color:yellow;>(대각선 이동은 불가능합니다.)</p></body></html>");
 		gamerule4 = new JLabel();
 		gamerule4.setText("<html><body> 1 ) 상대의 천사(4개)를 모두 잡으면 승리합니다.<br><br> 2 ) 상대의 악마(3개)를 모두 잡으면 패배합니다! <br><br>3 ) 상대 진영에 표시된 자신의 팀 색깔과 일치하는 땅에 천사가 도달하면 승리합니다.<br>  <p style=color:yellow;>(이 공간은 악마가 이동할수없습니다.)</p></body></html>");
-		gamerule2.setBounds(0, 15, 700, 250);
+		gamerule2.setBounds(20, 15, 700, 250);
 		gamerule2.setFont(new Font("Seif", Font.CENTER_BASELINE, 15));
-		gamerule4.setBounds(0, 325, 700, 250);
+		gamerule4.setBounds(20, 325, 700, 250);
 		gamerule4.setFont(new Font("Seif", Font.CENTER_BASELINE, 15));
 		
 		ruleclose = new JButton("확인");
@@ -372,8 +374,8 @@ public class Gui extends JFrame {
 		rulepanel.add(gamerule3);
 		rulepanel.add(gamerule4);
 		rulepanel.add(ruleclose);
-		ruleframe.add(gameimage);
-		ruleframe.add(gameimage2);
+		rulepanel.add(gameimage);
+		rulepanel.add(gameimage2);
 		ruleframe.add(rulepanel);
 	}
 
