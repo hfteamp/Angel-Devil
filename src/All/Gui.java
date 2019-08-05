@@ -26,7 +26,7 @@ public class Gui extends JFrame {
 	JButton playerchoice; // 플레이어 패널
 	JRadioButton p1 = new JRadioButton("플레이어1"); 
 	JRadioButton p2 = new JRadioButton("플레이어2(선공)"); 
-	JRadioButton server = new JRadioButton("서버");
+	JRadioButton server = new JRadioButton("서버"); 
 	JRadioButton client = new JRadioButton("클라이언트");
 	ButtonGroup gp = new ButtonGroup(); // 플레이어 버튼 그룹
 	ButtonGroup sc = new ButtonGroup(); // 서버와 클라 버튼 그룹
